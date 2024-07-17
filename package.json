@@ -1,6 +1,6 @@
 {
   "name": "OneTMD",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
   "scripts": {
     "dev": "next dev",
