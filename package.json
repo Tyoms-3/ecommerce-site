@@ -1,6 +1,6 @@
 {
-  "name": "TMD",
-  "version": "1.0.0",
+  "name": "OneTMD",
+  "version": "1.0.2",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
   "scripts": {
     "dev": "next dev",
@@ -13,7 +13,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "chakra-ui": "^1.6.5",
-    "axios": "^0.21.1" // Pour les requêtes HTTP
+    "axios": "^0.21.1" 
   },
   "devDependencies": {
     "eslint": "^7.32.0",
