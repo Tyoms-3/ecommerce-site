@@ -1,0 +1,39 @@
+{
+  "name": "TMD",
+  "version": "1.0.0",
+  "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^12.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "chakra-ui": "^1.6.5",
+    "axios": "^0.21.1" // Pour les requêtes HTTP
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tyoms-3/ecommerce-site.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "nextjs",
+    "react",
+    "custom clothing",
+    "couple accessories"
+  ],
+  "author": "DEFFIEUX Thomas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tyoms-3/ecommerce-site/issues"
+  },
+  "homepage": "https://github.com/Tyoms-3/ecommerce-site#readme"
+}
