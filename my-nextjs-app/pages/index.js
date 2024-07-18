@@ -9,31 +9,21 @@ export default function Home() {
           <title>OneTMD - E-commerce</title>
         </Head>
         {/* Bandeau */}
-        <Box className="bandeau">
-          <img src="/logo.png" alt="Logo One TMD" />
-          <Text fontSize="xl" fontWeight="bold">One TMD</Text>
+        <Box className="bandeau" textAlign="center" py={4} bg="black" color="white">
+          <img src="/logo.png" alt="Logo One TMD" style={{ width: '100px', height: 'auto' }} />
+          <Text fontSize="2xl" fontWeight="bold">One TMD</Text>
         </Box>
         {/* Contenu principal */}
         <Box p={5}>
           <Text fontSize="xl">Welcome to OneTMD E-commerce!</Text>
-          {/* Image de fond */}
-          <Box
-            className="background-image"
-            h="300px"
-            backgroundImage="url('/background-image.jpg')" // Remplacez par votre image de fond
-            backgroundSize="cover"
-            backgroundPosition="center"
-            backgroundRepeat="no-repeat"
-            mb={5}
-          >
-            <Box bg="rgba(0,0,0,0.5)" h="100%">
-              <Text fontSize="2xl" color="white" fontWeight="bold" textAlign="center" mt="40%">
-                L'attention à portée de main
-              </Text>
-              <Text fontSize="lg" color="white" textAlign="center">
-                Exprimez votre amour en offrant et partageant des moments précieux et uniques où chaque détail compte.
-              </Text>
-            </Box>
+          {/* Contenu principal */}
+          <Box mb={5}>
+            <Text fontSize="2xl" fontWeight="bold" textAlign="center" mt={10}>
+              L'attention à portée de main
+            </Text>
+            <Text fontSize="lg" textAlign="center" mt={3}>
+              Exprimez votre amour en offrant et partageant des moments précieux et uniques où chaque détail compte.
+            </Text>
           </Box>
           {/* Autre contenu de votre site */}
           <Text fontSize="lg">
