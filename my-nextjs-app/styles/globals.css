@@ -3,3 +3,27 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.bandeau {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff; /* Fond blanc pour le bandeau */
+    height: 80px; /* Hauteur du bandeau */
+    z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
+}
+
+.logo {
+    width: 50px; /* Ajustez la taille du logo selon vos besoins */
+    margin-right: 10px; /* Espace entre le logo et le texte */
+}
+
+.bandeau h1 {
+    font-size: 24px; /* Taille du texte "One TMD" */
+    color: #000000; /* Couleur du texte */
+    font-family: 'Arial', sans-serif; /* Police de caractères */
+}
