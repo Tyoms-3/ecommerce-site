@@ -10,14 +10,13 @@ body {
 /* Styles pour le bandeau */
 .bandeau {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: center; /* Aligne verticalement le contenu */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: #ffffff; /* Fond blanc pour le bandeau */
-  height: 80px; /* Hauteur du bandeau */
+  height: 100px; /* Hauteur ajustée pour mieux s'adapter au logo */
   z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
   padding: 0 20px; /* Espacement intérieur du bandeau */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
@@ -25,13 +24,14 @@ body {
 
 /* Style pour le logo */
 .logo {
-  width: 50px; /* Ajustez la taille du logo selon vos besoins */
-  margin-right: 10px; /* Espace entre le logo et le texte */
+  width: 70px; /* Taille ajustée du logo */
+  height: auto; /* Conserve les proportions du logo */
+  margin-right: 15px; /* Espace entre le logo et le texte */
 }
 
 /* Styles pour le texte "One TMD" */
 .bandeau h1 {
-  font-size: 24px; /* Taille du texte "One TMD" */
+  font-size: 28px; /* Taille du texte ajustée pour mieux s'aligner avec le logo */
   color: #000000; /* Couleur du texte */
   font-family: 'Arial', sans-serif; /* Police de caractères */
   margin: 0; /* Supprime les marges autour du texte */
