@@ -1,0 +1,28 @@
+/* styles/Bandeau.module.css */
+
+.bandeau {
+  display: flex;
+  align-items: center; /* Aligne verticalement le contenu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff; /* Fond blanc pour le bandeau */
+  height: 70px; /* Hauteur du bandeau */
+  z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
+  padding: 0 20px; /* Espacement intérieur du bandeau */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
+}
+
+.logo {
+  height: 30px; /* Hauteur du logo */
+  margin-right: 20px; /* Espace entre le logo et le texte */
+}
+
+.titrePrincipal {
+  font-size: 20px; /* Taille du texte "One TMD" */
+  color: #000000; /* Couleur du texte */
+  font-family: 'Arial', sans-serif; /* Police de caractères */
+  margin: 0; /* Supprime les marges autour du texte */
+  text-transform: uppercase; /* Transforme le texte en majuscules */
+}
