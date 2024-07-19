@@ -1,3 +1,5 @@
+// components/Bandeau.js
+
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -43,6 +45,7 @@ const Bandeau = () => {
   return (
     <Box className={`${styles.bandeau} ${show ? styles.show : styles.hide}`} bg="black" color="white" p={4}>
       <Flex justify="space-between" align="center" w="100%">
+        {/* Menu Hamburger */}
         <IconButton
           aria-label="Open menu"
           icon={<HamburgerIcon />}
@@ -50,12 +53,15 @@ const Bandeau = () => {
           colorScheme="whiteAlpha"
           onClick={onOpen}
         />
+        {/* Titre centré */}
         <Heading as="h1" size="lg" className={styles.titrePrincipal}>
           One TMD
         </Heading>
+        {/* Logo aligné à droite */}
         <img src="/logo.png" alt="Logo One TMD" className={styles.logo} />
       </Flex>
 
+      {/* Menu Drawer */}
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
@@ -74,4 +80,3 @@ const Bandeau = () => {
 };
 
 export default Bandeau;
-
