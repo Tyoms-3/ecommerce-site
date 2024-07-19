@@ -1,7 +1,7 @@
 // components/Bandeau.js
 
 import React from 'react';
-import styles from '../styles/globals.css';
+import styles from '../styles/Bandeau.module.css'; // Utilisez un module CSS pour les styles locaux
 
 const Bandeau = () => {
     return (
