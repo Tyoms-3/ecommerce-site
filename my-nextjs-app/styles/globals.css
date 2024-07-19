@@ -24,14 +24,13 @@ body {
 
 /* Style pour le logo */
 .logo {
-  height: 50px; /* Ajuste la hauteur du logo pour qu'il s'adapte à la nouvelle hauteur du bandeau */
-  width: auto; /* Conserve les proportions du logo */
-  margin-right: 15px; /* Espace entre le logo et le texte */
+  height: 40px; /* Ajustez la taille du logo selon vos besoins */
+  margin-right: 10px; /* Espace entre le logo et le texte */
 }
 
 /* Styles pour le texte "One TMD" */
 .bandeau h1 {
-  font-size: 24px; /* Taille ajustée du texte pour correspondre à la hauteur réduite du bandeau */
+  font-size: 24px; /* Taille du texte "One TMD" */
   color: #000000; /* Couleur du texte */
   font-family: 'Arial', sans-serif; /* Police de caractères */
   margin: 0; /* Supprime les marges autour du texte */
