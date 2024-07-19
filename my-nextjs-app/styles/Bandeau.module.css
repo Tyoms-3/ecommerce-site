@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #ffffff; /* Fond blanc pour le bandeau */
+  background-color: #000000; /* Fond noir pour le bandeau */
   height: 70px; /* Hauteur du bandeau */
   z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
   padding: 0 20px; /* Espacement intérieur du bandeau */
@@ -21,7 +21,7 @@
 
 .titrePrincipal {
   font-size: 20px; /* Taille du texte "One TMD" */
-  color: #000000; /* Couleur du texte */
+  color: #ffffff; /* Couleur noir du texte */
   font-family: 'Arial', sans-serif; /* Police de caractères */
   margin: 0; /* Supprime les marges autour du texte */
   text-transform: uppercase; /* Transforme le texte en majuscules */
