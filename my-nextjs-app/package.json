@@ -12,11 +12,11 @@
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "framer-motion": "^11.3.6",
-    "axios": "^1.7.2"
+    "@chakra-ui/react": "^2.8.2",  // Chakra UI
+    "@emotion/react": "^11.11.4",  // Emotion (Chakra UI dépend de cette librairie pour le styling)
+    "@emotion/styled": "^11.11.5", // Emotion Styled
+    "framer-motion": "^11.3.6",    // Framer Motion (utilisé avec Chakra UI pour les animations)
+    "axios": "^1.7.2"              // Axios pour les requêtes HTTP
   },
   "devDependencies": {
     "eslint": "^8.0.0",
@@ -40,3 +40,4 @@
   },
   "homepage": "https://github.com/Tyoms-3/ecommerce-site/tree/main/my-nextjs-app"
 }
+
