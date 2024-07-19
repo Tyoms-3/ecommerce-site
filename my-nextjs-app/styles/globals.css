@@ -16,7 +16,7 @@ body {
   left: 0;
   right: 0;
   background-color: #ffffff; /* Fond blanc pour le bandeau */
-  height: 70px; /* Hauteur réduite du bandeau */
+  height: 60px; /* Hauteur réduite du bandeau pour plus d'espace */
   z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
   padding: 0 20px; /* Espacement intérieur du bandeau */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
@@ -24,8 +24,8 @@ body {
 
 /* Style pour le logo */
 .logo {
-  height: 20px !important; /* Hauteur réduite du logo, avec importance pour s'assurer qu'elle soit appliquée */
-  margin-right: 20px; /* Espace entre le logo et le texte */
+  height: 30px; /* Hauteur du logo ajustée pour une meilleure visibilité */
+  margin-right: 15px; /* Réduit l'espace entre le logo et le texte */
 }
 
 /* Styles pour le texte "One TMD" */
@@ -73,4 +73,3 @@ body {
   font-size: 1.5rem;
   margin-top: 20px;
 }
-
