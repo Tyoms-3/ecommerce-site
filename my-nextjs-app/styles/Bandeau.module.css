@@ -2,37 +2,44 @@
 
 .bandeau {
   display: flex;
-  align-items: center; /* Aligne verticalement le contenu */
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #000000; /* Fond noir pour le bandeau */
-  height: 70px; /* Hauteur du bandeau */
-  z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
-  padding: 0 50px; /* Espacement intérieur du bandeau */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
-  justify-content: space-between; /* Éspace entre logo et bouton */
+  background-color: #000000;
+  height: 70px;
+  z-index: 1000;
+  padding: 0 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.show {
+  transform: translateY(0);
+}
+
+.hide {
+  transform: translateY(-100%);
 }
 
 .logo {
-  height: 45px; /* Hauteur du logo */
-  margin-right: 20px; /* Espace entre le logo et le texte */
-
+  height: 45px;
+  margin-left: auto;
 }
 
 .titrePrincipal {
-  font-size: 20px; /* Taille du texte "One TMD" */
-  color: #ffffff; /* Couleur blanc du texte */
-  font-family: 'Arial', sans-serif; /* Police de caractères */
-  margin: 0; /* Supprime les marges autour du texte */
-  text-transform: uppercase; /* Transforme le texte en majuscules */
+  font-size: 20px;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  text-transform: uppercase;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* Styles pour le menu latéral */
 .menu {
   position: fixed;
   top: 0;
