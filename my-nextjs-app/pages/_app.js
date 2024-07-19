@@ -1,12 +1,16 @@
-import '../styles/globals.css'
-import { ChakraProvider } from '@chakra-ui/react'
+// components/Bandeau.js
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  )
-}
+import React from 'react';
+import '../styles/globals.css'; // Importer les styles globaux
 
-export default MyApp
+const Bandeau = () => {
+    return (
+        <div className="bandeau"> {/* Utilisation des classes CSS globales */}
+            <img src="/logo.png" alt="Logo One TMD" className="logo" />
+            <h1>One TMD</h1>
+        </div>
+    );
+};
+
+export default Bandeau;
+
