@@ -12,17 +12,61 @@
   z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
   padding: 0 50px; /* Espacement intérieur du bandeau */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
+  justify-content: space-between; /* Éspace entre logo et bouton */
 }
 
 .logo {
   height: 45px; /* Hauteur du logo */
-  margin-right: 50px; /* Espace entre le logo et le texte */
+  margin-right: 20px; /* Espace entre le logo et le texte */
 }
 
 .titrePrincipal {
   font-size: 20px; /* Taille du texte "One TMD" */
-  color: #ffffff; /* Couleur noir du texte */
+  color: #ffffff; /* Couleur blanc du texte */
   font-family: 'Arial', sans-serif; /* Police de caractères */
   margin: 0; /* Supprime les marges autour du texte */
   text-transform: uppercase; /* Transforme le texte en majuscules */
+}
+
+.menuButton {
+  display: none; /* Masquer le bouton hamburger par défaut */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menuButton div {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 4px 0;
+}
+
+/* Style pour le menu latéral */
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.menu.open {
+  transform: translateX(0);
+}
+
+.menuItem {
+  margin: 15px 0;
+  font-size: 18px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.menuItem:hover {
+  text-decoration: underline;
 }
