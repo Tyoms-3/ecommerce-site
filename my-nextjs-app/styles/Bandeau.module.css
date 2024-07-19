@@ -12,12 +12,10 @@
   z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
   padding: 0 50px; /* Espacement intérieur du bandeau */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
-  justify-content: space-between; /* Éspace entre logo et bouton */
 }
 
 .logo {
   height: 45px; /* Hauteur du logo */
-  margin-right: 20px; /* Espace entre le logo et le texte */
 }
 
 .titrePrincipal {
@@ -26,22 +24,12 @@
   font-family: 'Arial', sans-serif; /* Police de caractères */
   margin: 0; /* Supprime les marges autour du texte */
   text-transform: uppercase; /* Transforme le texte en majuscules */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.menuButton {
-  display: none; /* Masquer le bouton hamburger par défaut */
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.menuButton div {
-  width: 25px;
-  height: 3px;
-  background-color: #ffffff;
-  margin: 4px 0;
-}
-
-/* Style pour le menu latéral */
+/* Styles pour le menu latéral */
 .menu {
   position: fixed;
   top: 0;
