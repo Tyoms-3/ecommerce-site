@@ -10,7 +10,7 @@ const Bandeau = () => {
 
   return (
     <Box className={styles.bandeau} bg="black" color="white" p={4}>
-      <Flex justify="space-between" align="center">
+      <Flex justify="space-between" align="center" w="100%">
         {/* Menu Hamburger */}
         <IconButton
           aria-label="Open menu"
@@ -19,14 +19,12 @@ const Bandeau = () => {
           colorScheme="whiteAlpha"
           onClick={onOpen}
         />
-
-        {/* Logo et Titre */}
-        <Flex align="center">
-          <img src="/logo.png" alt="Logo One TMD" className={styles.logo} />
-          <Heading as="h1" size="lg" ml={3} className={styles.titrePrincipal}>
-            One TMD
-          </Heading>
-        </Flex>
+        {/* Titre centré */}
+        <Heading as="h1" size="lg" className={styles.titrePrincipal}>
+          One TMD
+        </Heading>
+        {/* Logo aligné à droite */}
+        <img src="/logo.png" alt="Logo One TMD" className={styles.logo} />
       </Flex>
 
       {/* Menu Drawer */}
