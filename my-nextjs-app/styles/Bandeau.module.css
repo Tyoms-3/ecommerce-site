@@ -12,10 +12,13 @@
   z-index: 1000; /* Assure que le bandeau est au-dessus du contenu */
   padding: 0 50px; /* Espacement intérieur du bandeau */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère sous le bandeau */
+  justify-content: space-between; /* Éspace entre logo et bouton */
 }
 
 .logo {
   height: 45px; /* Hauteur du logo */
+  margin-right: 20px; /* Espace entre le logo et le texte */
+
 }
 
 .titrePrincipal {
