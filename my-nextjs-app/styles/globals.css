@@ -24,8 +24,8 @@ body {
 
 /* Style pour le logo */
 .logo {
-  height: 30px !important; /* Hauteur réduite du logo, avec importance pour s'assurer qu'elle soit appliquée */
-  margin-right: 10px; /* Espace entre le logo et le texte */
+  height: 20px !important; /* Hauteur réduite du logo, avec importance pour s'assurer qu'elle soit appliquée */
+  margin-right: 20px; /* Espace entre le logo et le texte */
 }
 
 /* Styles pour le texte "One TMD" */
