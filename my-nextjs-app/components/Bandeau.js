@@ -6,6 +6,7 @@ import {
   Box,
   Flex,
   IconButton,
+  Heading, 
   useDisclosure,
   Drawer,
   DrawerOverlay,
@@ -51,6 +52,7 @@ const Bandeau = () => {
           </DrawerContent>
         </Drawer>
       </Box>
+    </Headroom>
   );
 };
 
