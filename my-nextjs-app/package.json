@@ -17,7 +17,8 @@
     "@emotion/react": "^11.11.4",  
     "@emotion/styled": "^11.11.5", 
     "framer-motion": "^11.3.6",    
-    "axios": "^1.7.2"
+    "axios": "^1.7.2", 
+    "react-headroom": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^8.0.0",
