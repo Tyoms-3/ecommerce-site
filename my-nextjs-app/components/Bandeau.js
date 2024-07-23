@@ -6,7 +6,7 @@ import {
   Box,
   Flex,
   IconButton,
-  Heading, 
+  Heading,
   useDisclosure,
   Drawer,
   DrawerOverlay,
@@ -23,6 +23,7 @@ const Bandeau = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
+    <Headroom>
       <Box className={styles.bandeau} bg="black" color="white" p={4}>
         <Flex justify="space-between" align="center" w="100%">
           <IconButton
@@ -57,5 +58,3 @@ const Bandeau = () => {
 };
 
 export default Bandeau;
-
-
