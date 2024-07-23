@@ -51,7 +51,6 @@ const Bandeau = () => {
           </DrawerContent>
         </Drawer>
       </Box>
-    </Headroom>
   );
 };
 
