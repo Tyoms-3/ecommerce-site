@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
       <Bandeau />
-      <Box mt="10px"> {/* Marge en haut pour éviter que le contenu soit masqué */}
+      <Box mt="0px"> {/* Marge en haut pour éviter que le contenu soit masqué */}
         <Component {...pageProps} />
       </Box>
     </ChakraProvider>
