@@ -2,7 +2,6 @@
 
 import Head from 'next/head';
 import { Box, Text } from '@chakra-ui/react';
-import styles from '../styles/globals.css'; // Assurez-vous que le chemin est correct
 
 export default function Home() {
   return (
@@ -28,4 +27,3 @@ export default function Home() {
     </Box>
   );
 }
-
