@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       {/* Contenu principal */}
       <Box p={5}>
-        <Text fontSize="xl">Bienvenu sur notre boutique !</Text>
+        <Text fontSize="xl"></Text>
         {/* Section avec image de fond */}
         <Box className="sectionPrincipale">
           <Box className="contenuTexte">
