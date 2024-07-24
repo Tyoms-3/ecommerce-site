@@ -1,4 +1,4 @@
-/* globals.css */
+/* styles/globals.css */
 
 /* Réinitialisation des marges et des paddings */
 body {
@@ -9,15 +9,11 @@ body {
 
 /* Styles pour la section principale */
 .sectionPrincipale {
-  /* Styles pour la section principale */
-}
-
-.imageFond {
   position: relative;
   width: 100%;
   height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
   overflow: hidden;
-  background-image: url('/images/image-fond.jpg');
+  background-image: url('/images/image-fond.jpg'); /* Assurez-vous que le chemin est correct */
   background-size: cover;
   background-position: center;
 }
