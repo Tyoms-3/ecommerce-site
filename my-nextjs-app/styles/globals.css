@@ -14,7 +14,7 @@ body {
   height: 650px; /* Ajustez la hauteur selon vos besoins */
   overflow: hidden;
   background-image: url('/image2-fond.jpg'); /* Assurez-vous que le chemin est correct */
-  background-size: contain; /* Ajuste la taille de l'image pour couvrir l'élément */
+  background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
   background-position: center; /* Centre l'image */
   background-repeat: no-repeat; /* Évite la répétition de l'image */
 }
