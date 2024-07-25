@@ -12,7 +12,7 @@ body, html {
 /* Styles pour la section principale */
 .sectionPrincipale {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh; /* Utilisation de 100vh pour couvrir toute la hauteur de la vue */
   overflow: hidden;
   background-image: url('/image3-fond.jpg'); /* Assurez-vous que le chemin est correct */
