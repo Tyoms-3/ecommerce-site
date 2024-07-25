@@ -28,7 +28,7 @@ body, html {
   transform: translate(-50%, -50%);
   text-align: center;
   color: #ffffff; /* Couleur du texte blanc */
-  padding: 0px; /* Ajoute un peu de padding pour que le texte ne touche pas les bords */
+  padding: 20px; /* Ajoute un peu de padding pour que le texte ne touche pas les bords */
 }
 
 .titrePrincipal {
