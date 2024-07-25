@@ -12,7 +12,7 @@ body, html {
 /* Styles pour la section principale */
 .sectionPrincipale {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh; /* Utilisation de 100vh pour couvrir toute la hauteur de la vue */
   overflow: hidden;
   background-image: url('/image3-fond.jpg'); /* Assurez-vous que le chemin est correct */
@@ -28,7 +28,7 @@ body, html {
   transform: translate(-50%, -50%);
   text-align: center;
   color: #ffffff; /* Couleur du texte blanc */
-  padding: 20px; /* Ajoute un peu de padding pour que le texte ne touche pas les bords */
+  padding: 0px; /* Ajoute un peu de padding pour que le texte ne touche pas les bords */
 }
 
 .titrePrincipal {
