@@ -1,10 +1,12 @@
 /* styles/globals.css */
 
 /* Réinitialisation des marges et des paddings */
-body {
+body, html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
 /* Styles pour la section principale */
@@ -14,7 +16,7 @@ body {
   height: 100vh; /* Utilisation de 100vh pour couvrir toute la hauteur de la vue */
   overflow: hidden;
   background-image: url('/image3-fond.jpg'); /* Assurez-vous que le chemin est correct */
-  background-size: contain; /* Ajuste la taille de l'image pour contenir l'élément sans couper l'image */
+  background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
   background-position: center; /* Centre l'image */
   background-repeat: no-repeat; /* Évite la répétition de l'image */
 }
@@ -86,4 +88,3 @@ body {
     font-size: 2vw; /* Ajustez la taille du slogan pour les grands écrans */
   }
 }
-
