@@ -10,9 +10,9 @@ body, html {
 }
 
 #__next {
+    min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 /* Styles pour la section principale */
