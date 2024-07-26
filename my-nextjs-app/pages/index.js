@@ -1,5 +1,3 @@
-// pages/index.js
-
 import Head from 'next/head';
 import { Box, Text } from '@chakra-ui/react';
 
@@ -10,7 +8,7 @@ export default function Home() {
         <title>OneTMD - E-commerce</title>
       </Head>
       {/* Contenu principal */}
-      <Box p={5}>
+      <Box p={0}> {/* Retirez le padding ici pour ne pas affecter la sectionPrincipale */}
         <Text fontSize="xl"></Text>
         {/* Section avec image de fond */}
         <Box className="sectionPrincipale">
@@ -20,10 +18,13 @@ export default function Home() {
           </Box>
         </Box>
         {/* Autre contenu de votre site */}
-        <Text fontSize="lg" mt={5}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo sagittis ipsum eu hendrerit. Nulla in ligula in arcu consequat ultricies. Donec vitae nisl aliquam, aliquet neque vel, condimentum lectus. Morbi varius purus ac erat vehicula dictum. Nulla facilisi.
-        </Text>
+        <Box p={5}> {/* Ajoutez padding ici pour le contenu en dessous de la sectionPrincipale */}
+          <Text fontSize="lg" mt={5}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo sagittis ipsum eu hendrerit. Nulla in ligula in arcu consequat ultricies. Donec vitae nisl aliquam, aliquet neque vel, condimentum lectus. Morbi varius purus ac erat vehicula dictum. Nulla facilisi.
+          </Text>
+        </Box>
       </Box>
     </Box>
   );
 }
+
