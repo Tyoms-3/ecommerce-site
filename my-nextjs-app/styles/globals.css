@@ -57,7 +57,7 @@ body, html {
 /* Petits écrans (smartphones en mode portrait) */
 @media (max-width: 600px) {
   .sectionPrincipale {
-    height: 100vh; /* Couvrir toute la hauteur de l'écran */
+    height: 150vh; /* Couvrir toute la hauteur de l'écran */
   }
 
   .titrePrincipal {
@@ -72,7 +72,7 @@ body, html {
 /* Écrans moyens (tablettes en mode portrait et petits ordinateurs portables) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .sectionPrincipale {
-    height: 100vh; /* Couvrir toute la hauteur de l'écran */
+    height: 150vh; /* Couvrir toute la hauteur de l'écran */
   }
 
   .titrePrincipal {
@@ -87,7 +87,7 @@ body, html {
 /* Grands écrans (grands ordinateurs de bureau) */
 @media (min-width: 1025px) {
   .sectionPrincipale {
-    height: 100vh; /* Couvrir toute la hauteur de l'écran */
+    height: 150vh; /* Couvrir toute la hauteur de l'écran */
   }
 
   .titrePrincipal {
