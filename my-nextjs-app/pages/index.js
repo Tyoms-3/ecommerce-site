@@ -65,8 +65,3 @@ export default function Home() {
     </Box>
   );
 }
-
-    </Box>
-  );
-}
-
