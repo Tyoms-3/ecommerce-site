@@ -73,4 +73,7 @@ main {
 
 .card .price {
   margin-top: 10px;
-  font-size: 1
+  font-size: 1.2em; /* Ajout d'une unité de mesure */
+  color: #000;
+  font-weight: bold;
+}
