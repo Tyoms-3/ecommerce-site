@@ -101,7 +101,7 @@ body, html {
 
 /* Nouvelle section */
 .newSection {
-  background-color: #B5A1A0; /* Couleur de fond */
+  background-color: #f4f4f4; /* Couleur de fond */
   padding: 50px 20px; /* Padding pour la section */
   display: flex;
   justify-content: space-around; /* Centrer les cadres horizontalement */
