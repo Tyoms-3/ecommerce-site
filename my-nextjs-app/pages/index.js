@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Box, Text } from '@chakra-ui/react';
+import '../styles/globals.css'; // Assurez-vous que ce fichier est importé pour appliquer les styles globaux
 
 export default function Home() {
   return (
@@ -11,39 +12,38 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box textAlign="center" color="white" bg="teal.500" p={4}>
-        <Text fontSize="4xl">L'attention à portée de main</Text>
-        <Text fontSize="xl">Votre slogan ici</Text>
+      <header>
+        <Text fontSize="2xl" color="white">Mon Application</Text>
+      </header>
+
+      <Box className="sectionPrincipale">
+        <Text fontSize="5xl" color="white" textAlign="center" mt="20%">
+          L'attention à portée de main
+        </Text>
+        <Text fontSize="2xl" color="white" textAlign="center">
+          Votre slogan ici
+        </Text>
       </Box>
 
       <main>
-        <Box className="sectionPrincipale" p={4}>
-          {/* Contenu de la section principale */}
-        </Box>
-        
-        <Box className="newSection" display="flex" justifyContent="space-around" p={4}>
-          <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
+        <Box className="newSection">
+          <Box className="card">
             <Image src="/product1.jpg" alt="Product 1" width={200} height={200} />
-            <Text as="h3" fontSize="xl" mt={2}>Product 1</Text>
-            <Text mt={2}>This is the description for Product 1.</Text>
-            <Text className="price" mt={2} fontSize="lg">$10.00</Text>
+            <Text as="h3">Product 1</Text>
+            <Text>This is the description for Product 1.</Text>
+            <Text className="price">$10.00</Text>
           </Box>
 
-          <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
+          <Box className="card">
             <Image src="/product2.jpg" alt="Product 2" width={200} height={200} />
-            <Text as="h3" fontSize="xl" mt={2}>Product 2</Text>
-            <Text mt={2}>This is the description for Product 2.</Text>
-            <Text className="price" mt={2} fontSize="lg">$20.00</Text>
+            <Text as="h3">Product 2</Text>
+            <Text>This is the description for Product 2.</Text>
+            <Text className="price">$20.00</Text>
           </Box>
 
-          <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
+          <Box className="card">
             <Image src="/product3.jpg" alt="Product 3" width={200} height={200} />
-            <Text as="h3" fontSize="xl" mt={2}>Product 3</Text>
-            <Text mt={2}>This is the description for Product 3.</Text>
-            <Text className="price" mt={2} fontSize="lg">$30.00</Text>
-          </Box>
-        </Box>
-      </main>
-    </Box>
-  );
-}
+            <Text as="h3">Product 3</Text>
+            <Text>This is the description for Product 3.</Text>
+            <Text className="price">$30.00</Text>
+          </Bo
