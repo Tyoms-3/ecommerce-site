@@ -1,24 +1,23 @@
-/* styles/globals.css */
-
-/* Réinitialisation des marges et des paddings */
-body, html {
+/* Styles globaux */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  background-color: #f4f4f4;
 }
 
-#__next {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
 }
 
+main {
+  padding: 20px; /* Ce padding s'applique aux autres éléments à l'intérieur du <main> */
+}
 
-/* Styles pour la section principale */
+/* Section spécifique pour l'image de fond */
 .sectionPrincipale {
   position: relative;
   width: 100%;
@@ -28,73 +27,50 @@ body, html {
   background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
   background-position: center; /* Centre l'image */
   background-repeat: no-repeat; /* Évite la répétition de l'image */
-    padding: 0; /* Retire le padding pour cette section spécifique */
+  padding: 0; /* Retire le padding pour cette section spécifique */
 }
 
-.contenuTexte {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* Nouvelle section */
+.newSection {
+  background-color: #B5A1A0; /* Couleur de fond */
+  padding: 50px 20px; /* Padding pour la section */
+  display: flex;
+  justify-content: space-around; /* Centrer les cadres horizontalement */
+  align-items: flex-start; /* Aligner les cadres sur la même hauteur */
+  flex-wrap: wrap; /* Permettre aux cadres de se déplacer à la ligne suivante si nécessaire */
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
   text-align: center;
-  color: #ffffff; /* Couleur du texte blanc */
-  padding: 20px; /* Ajoute un peu de padding pour que le texte ne touche pas les bords */
+  width: 30%;
+  margin: 10px; /* Espacement entre les cartes */
+  transition: transform 0.3s ease; /* Animation pour l'agrandissement */
+  box-sizing: border-box; /* Inclure padding et border dans la largeur */
 }
 
-.titrePrincipal {
-  font-size: 4vw; /* Utilisation des unités viewport pour une taille de texte responsive */
-  font-weight: bold;
-  margin: 0; /* Enlève les marges par défaut */
+.card:hover {
+  transform: scale(1.05); /* Agrandissement au survol */
 }
 
-.slogan {
-  font-size: 2vw; /* Utilisation des unités viewport pour une taille de texte responsive */
-  margin-top: 10px; /* Ajuste l'espacement au-dessus du slogan */
+.card img {
+  max-width: 100%;
+  height: auto;
 }
 
-/* Media Queries */
-
-/* Petits écrans (smartphones en mode portrait) */
-@media (max-width: 600px) {
-  .sectionPrincipale {
-    height: 150vh; /* Couvrir toute la hauteur de l'écran */
-  }
-
-  .titrePrincipal {
-    font-size: 6vw; /* Ajustez la taille du titre pour les petits écrans */
-  }
-
-  .slogan {
-    font-size: 3vw; /* Ajustez la taille du slogan pour les petits écrans */
-  }
+.card h3 {
+  margin: 10px 0;
+  font-size: 1.5em;
 }
 
-/* Écrans moyens (tablettes en mode portrait et petits ordinateurs portables) */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .sectionPrincipale {
-    height: 150vh; /* Couvrir toute la hauteur de l'écran */
-  }
-
-  .titrePrincipal {
-    font-size: 5vw; /* Ajustez la taille du titre pour les écrans moyens */
-  }
-
-  .slogan {
-    font-size: 2.5vw; /* Ajustez la taille du slogan pour les écrans moyens */
-  }
+.card p {
+  margin: 10px 0;
+  font-size: 1em;
+  color: #333;
 }
 
-/* Grands écrans (grands ordinateurs de bureau) */
-@media (min-width: 1025px) {
-  .sectionPrincipale {
-    height: 150vh; /* Couvrir toute la hauteur de l'écran */
-  }
-
-  .titrePrincipal {
-    font-size: 4vw; /* Ajustez la taille du titre pour les grands écrans */
-  }
-
-  .slogan {
-    font-size: 2vw; /* Ajustez la taille du slogan pour les grands écrans */
-  }
-}
+.card .price {
+  margin-top: 10px;
+  font-size: 1
