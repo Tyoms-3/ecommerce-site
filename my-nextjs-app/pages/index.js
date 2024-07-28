@@ -17,6 +17,27 @@ export default function Home() {
             <Text className="slogan">Exprimez votre amour en offrant et partageant des moments précieux et uniques où chaque détail compte.</Text>
           </Box>
         </Box>
+        {/* Section des boîtes */}
+        <Box className="newSection">
+          <Box className="card">
+            <img src="/image1.jpg" alt="Image 1" />
+            <h3>Produit 1</h3>
+            <p>Description du produit 1.</p>
+            <div className="price">$10.00</div>
+          </Box>
+          <Box className="card">
+            <img src="/image2.jpg" alt="Image 2" />
+            <h3>Produit 2</h3>
+            <p>Description du produit 2.</p>
+            <div className="price">$20.00</div>
+          </Box>
+          <Box className="card">
+            <img src="/image3.jpg" alt="Image 3" />
+            <h3>Produit 3</h3>
+            <p>Description du produit 3.</p>
+            <div className="price">$30.00</div>
+          </Box>
+        </Box>
         {/* Autre contenu de votre site */}
         <Box p={5}> {/* Ajoutez padding ici pour le contenu en dessous de la sectionPrincipale */}
           <Text fontSize="lg" mt={5}>
