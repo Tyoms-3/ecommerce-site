@@ -43,3 +43,50 @@ main {
   padding: 10px;
   text-align: center;
 }
+
+
+/* Nouvelle section */
+.newSection {
+  background-color: #B5A1A0; /* Couleur de fond */
+  padding: 50px 20px; /* Padding pour la section */
+  display: flex;
+  justify-content: space-around; /* Centrer les cadres horizontalement */
+  flex-wrap: wrap; /* Permettre aux cadres de se déplacer à la ligne suivante si nécessaire */
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+  width: 30%;
+  margin: 10px; /* Espacement entre les cartes */
+  transition: transform 0.3s ease; /* Animation pour l'agrandissement */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Agrandissement au survol */
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  margin: 10px 0;
+  font-size: 1.5em;
+}
+
+.card p {
+  margin: 10px 0;
+  font-size: 1em;
+  color: #333;
+}
+
+.card .price {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #000;
+  font-weight: bold;
+}
