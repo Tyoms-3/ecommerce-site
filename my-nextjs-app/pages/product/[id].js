@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { Box, Button, Text, Select, Textarea, Stack, Radio, RadioGroup } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Button, Text, Stack, Radio, RadioGroup, Textarea } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
 
 const ProductPage = () => {
   const router = useRouter();
@@ -10,27 +10,30 @@ const ProductPage = () => {
   const [embroidery, setEmbroidery] = useState('');
   const [price, setPrice] = useState(20); // Set default price based on the product
 
-  const updatePrice = (embroidery) => {
-    let newPrice = 20; // Reset to default price based on the product
-    switch (embroidery) {
-      case 'doubleBroderieGrandePetite':
-        newPrice += 3.5;
-        break;
-      case 'doubleBroderieGrande':
-        newPrice += 5;
-        break;
-      case 'doubleBroderiePetite':
-        newPrice += 2;
-        break;
-      default:
-        break;
-    }
-    setPrice(newPrice);
-  };
+  // Effect to update price when embroidery changes
+  useEffect(() => {
+    const updatePrice = () => {
+      let newPrice = 20; // Reset to default price based on the product
+      switch (embroidery) {
+        case 'doubleBroderieGrandePetite':
+          newPrice += 3.5;
+          break;
+        case 'doubleBroderieGrande':
+          newPrice += 5;
+          break;
+        case 'doubleBroderiePetite':
+          newPrice += 2;
+          break;
+        default:
+          break;
+      }
+      setPrice(newPrice);
+    };
+    updatePrice();
+  }, [embroidery]);
 
   const handleEmbroideryChange = (value) => {
     setEmbroidery(value);
-    updatePrice(value);
   };
 
   return (
@@ -43,20 +46,44 @@ const ProductPage = () => {
         <Button onClick={() => router.back()}>Retour</Button>
       </Box>
 
-      <Box p={4} display="flex">
-        <Box flex="1" p={4}>
-          <img src={`/image3-fond.jpg`} alt={`Product ${id}`} style={{ maxWidth: '100%' }} />
+      <Box p={4} display="flex" flexWrap="wrap">
+        <Box flex="1" p={4} minW="300px">
+          <img src={`/image3-fond.jpg`} alt={`Product ${id}`} style={{ maxWidth: '100%', borderRadius: '8px' }} />
         </Box>
 
-        <Box flex="1" p={4} bg="#B5A1A0">
+        <Box flex="1" p={4} bg="#B5A1A0" borderRadius="8px">
           <Text fontSize="2xl" mb={4}>Prix: €{price.toFixed(2)}</Text>
-          
+
           <Box mb={4}>
             <Text>Choix de la couleur:</Text>
-            <Stack direction="row">
-              <Box bg="red" w="20px" h="20px" onClick={() => setColor('red')} />
-              <Box bg="blue" w="20px" h="20px" onClick={() => setColor('blue')} />
-              <Box bg="green" w="20px" h="20px" onClick={() => setColor('green')} />
+            <Stack direction="row" spacing={4}>
+              <Box
+                bg="red"
+                w="20px"
+                h="20px"
+                borderRadius="full"
+                cursor="pointer"
+                border={color === 'red' ? '2px solid black' : 'none'}
+                onClick={() => setColor('red')}
+              />
+              <Box
+                bg="blue"
+                w="20px"
+                h="20px"
+                borderRadius="full"
+                cursor="pointer"
+                border={color === 'blue' ? '2px solid black' : 'none'}
+                onClick={() => setColor('blue')}
+              />
+              <Box
+                bg="green"
+                w="20px"
+                h="20px"
+                borderRadius="full"
+                cursor="pointer"
+                border={color === 'green' ? '2px solid black' : 'none'}
+                onClick={() => setColor('green')}
+              />
             </Stack>
           </Box>
 
