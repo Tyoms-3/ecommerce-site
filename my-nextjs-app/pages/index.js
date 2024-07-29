@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { Box, Text } from '@chakra-ui/react';
 
 export default function Home() {
@@ -18,24 +19,26 @@ export default function Home() {
           </Box>
         </Box>
         {/* Section des boîtes */}
-        <Box className="newSection">
-          <Box className="card">
-            <img src="/image1.jpg" alt="Image 1" />
-            <h3>Produit 1</h3>
-            <p>Description du produit 1.</p>
-            <div className="price">$10.00</div>
+        <Box className="newSection" display="flex" justifyContent="space-around" p={4}>
+          <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
+            <Image src="/image1.jpg" alt="Produit 1" width={200} height={200} />
+            <Text as="h3" fontSize="xl" mt={2}>Produit 1</Text>
+            <Text mt={2}>Description du produit 1.</Text>
+            <Text className="price" mt={2} fontSize="lg">$10.00</Text>
           </Box>
-          <Box className="card">
-            <img src="/image2.jpg" alt="Image 2" />
-            <h3>Produit 2</h3>
-            <p>Description du produit 2.</p>
-            <div className="price">$20.00</div>
+
+          <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
+            <Image src="/image2.jpg" alt="Produit 2" width={200} height={200} />
+            <Text as="h3" fontSize="xl" mt={2}>Produit 2</Text>
+            <Text mt={2}>Description du produit 2.</Text>
+            <Text className="price" mt={2} fontSize="lg">$20.00</Text>
           </Box>
-          <Box className="card">
-            <img src="/image3.jpg" alt="Image 3" />
-            <h3>Produit 3</h3>
-            <p>Description du produit 3.</p>
-            <div className="price">$30.00</div>
+
+          <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
+            <Image src="/image3.jpg" alt="Produit 3" width={200} height={200} />
+            <Text as="h3" fontSize="xl" mt={2}>Produit 3</Text>
+            <Text mt={2}>Description du produit 3.</Text>
+            <Text className="price" mt={2} fontSize="lg">$30.00</Text>
           </Box>
         </Box>
         {/* Autre contenu de votre site */}
@@ -48,3 +51,4 @@ export default function Home() {
     </Box>
   );
 }
+
