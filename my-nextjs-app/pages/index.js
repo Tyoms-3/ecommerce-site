@@ -21,24 +21,24 @@ export default function Home() {
         {/* Section des boîtes */}
         <Box className="newSection" display="flex" justifyContent="space-around" p={4}>
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image1.jpg" alt="Produit 1" width={200} height={200} />
+            <Image src="/image1.jpg" alt="Sweat personnalisé" width={200} height={200} />
             <Text as="h3" fontSize="xl" mt={2}>Produit 1</Text>
             <Text mt={2}>Description du produit 1.</Text>
-            <Text className="price" mt={2} fontSize="lg">$10.00</Text>
+            <Text className="price" mt={2} fontSize="lg">€20.00</Text>
           </Box>
 
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image2.jpg" alt="Produit 2" width={200} height={200} />
+            <Image src="/image2.jpg" alt="Pull personnalisé" width={200} height={200} />
             <Text as="h3" fontSize="xl" mt={2}>Produit 2</Text>
             <Text mt={2}>Description du produit 2.</Text>
-            <Text className="price" mt={2} fontSize="lg">$20.00</Text>
+            <Text className="price" mt={2} fontSize="lg">€25.00</Text>
           </Box>
 
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image3.jpg" alt="Produit 3" width={200} height={200} />
+            <Image src="/image3.jpg" alt="Pyjama personnalisé" width={200} height={200} />
             <Text as="h3" fontSize="xl" mt={2}>Produit 3</Text>
             <Text mt={2}>Description du produit 3.</Text>
-            <Text className="price" mt={2} fontSize="lg">$30.00</Text>
+            <Text className="price" mt={2} fontSize="lg">€30.00</Text>
           </Box>
         </Box>
         {/* Autre contenu de votre site */}
