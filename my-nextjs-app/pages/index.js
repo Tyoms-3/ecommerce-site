@@ -21,21 +21,21 @@ export default function Home() {
         {/* Section des boîtes */}
         <Box className="newSection" display="flex" justifyContent="space-around" p={4}>
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image1.jpg" alt="Sweat personnalisé" width={200} height={200} />
+            <Image src="/image1.jpg" />
             <Text as="h3" fontSize="xl" mt={2}>Sweat Personnalisé</Text>
             <Text mt={2}>Description du produit 1.</Text>
             <Text className="price" mt={2} fontSize="lg">€20.00</Text>
           </Box>
 
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image2.jpg" alt="" width={200} height={200} />
+            <Image src="/image2.jpg" />
             <Text as="h3" fontSize="xl" mt={2}>Pull personnalisé</Text>
             <Text mt={2}>Description du produit 2.</Text>
             <Text className="price" mt={2} fontSize="lg">€25.00</Text>
           </Box>
 
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image3.jpg" alt="" width={200} height={200} />
+            <Image src="/image3.jpg" />
             <Text as="h3" fontSize="xl" mt={2}>Pyjama personnalisé</Text>
             <Text mt={2}>Description du produit 3.</Text>
             <Text className="price" mt={2} fontSize="lg">€30.00</Text>
