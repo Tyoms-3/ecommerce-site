@@ -227,6 +227,7 @@ body, html {
     font-size: 4vw; /* Ajustez la taille du titre pour les grands écrans */
   }
 
- .slogan {
-  font-size: 2vw; /* Ajustez la taille du slogan pour les grands écrans */
+  .slogan {
+    font-size: 2vw; /* Ajustez la taille du slogan pour les grands écrans */
+  }
 }
