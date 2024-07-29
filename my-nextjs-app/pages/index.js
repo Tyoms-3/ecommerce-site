@@ -1,8 +1,15 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, Button } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleProductClick = (productId) => {
+    router.push(`/product/${productId}`);
+  };
+
   return (
     <Box>
       <Head>
@@ -25,6 +32,7 @@ export default function Home() {
             <Text as="h3" fontSize="xl" mt={2}>Sweat Personnalisé</Text>
             <Text mt={2}>Description du produit 1.</Text>
             <Text className="price" mt={2} fontSize="lg">€20.00</Text>
+            <Button mt={4} onClick={() => handleProductClick(1)}>Voir plus</Button>
           </Box>
 
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
@@ -32,6 +40,7 @@ export default function Home() {
             <Text as="h3" fontSize="xl" mt={2}>Pull personnalisé</Text>
             <Text mt={2}>Description du produit 2.</Text>
             <Text className="price" mt={2} fontSize="lg">€25.00</Text>
+            <Button mt={4} onClick={() => handleProductClick(2)}>Voir plus</Button>
           </Box>
 
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
@@ -39,6 +48,7 @@ export default function Home() {
             <Text as="h3" fontSize="xl" mt={2}>Pyjama personnalisé</Text>
             <Text mt={2}>Description du produit 3.</Text>
             <Text className="price" mt={2} fontSize="lg">€30.00</Text>
+            <Button mt={4} onClick={() => handleProductClick(3)}>Voir plus</Button>
           </Box>
         </Box>
         {/* Autre contenu de votre site */}
@@ -51,4 +61,3 @@ export default function Home() {
     </Box>
   );
 }
-
