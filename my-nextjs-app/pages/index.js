@@ -21,7 +21,7 @@ export default function Home() {
         {/* Section des boîtes */}
         <Box className="newSection" display="flex" justifyContent="space-around" p={4}>
           <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center">
-            <Image src="/image1.jpg" />
+            <Image src="/image3-fond.jpg" />
             <Text as="h3" fontSize="xl" mt={2}>Sweat Personnalisé</Text>
             <Text mt={2}>Description du produit 1.</Text>
             <Text className="price" mt={2} fontSize="lg">€20.00</Text>
