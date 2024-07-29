@@ -45,7 +45,7 @@ const ProductPage = () => {
 
       <Box p={4} display="flex">
         <Box flex="1" p={4}>
-          <img src={`/image${id}.jpg`} alt={`Product ${id}`} style={{ maxWidth: '100%' }} />
+          <img src={`/image3-fond.jpg`} alt={`Product ${id}`} style={{ maxWidth: '100%' }} />
         </Box>
 
         <Box flex="1" p={4} bg="#B5A1A0">
