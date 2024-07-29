@@ -3,24 +3,23 @@ import { Box, Text, Button, Image, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export default function ProductDetail() {
+const ProductDetails = ({ product }) => {
   const router = useRouter();
   const { id } = router.query;
 
-  // Prix de base pour chaque produit
   const basePrices = {
     1: 20.00,
     2: 25.00,
     3: 30.00,
   };
 
-  const [price, setPrice] = useState(basePrices[id]);
+  const [price, setPrice] = useState(basePrices[id] || 0);
   const [color, setColor] = useState('');
   const [embroidery, setEmbroidery] = useState('');
 
   const handleColorChange = (color) => {
     setColor(color);
-    // Ajoute la logique pour changer l'image en fonction de la couleur
+    // Ajoutez la logique pour changer l'image en fonction de la couleur
   };
 
   const handleEmbroideryChange = (type) => {
@@ -54,23 +53,23 @@ export default function ProductDetail() {
         <title>Détail du Produit {id}</title>
       </Head>
 
-      <Button onClick={() => router.push('/')}>Retour à la section des produits</Button>
+      <Button onClick={() => router.push('/product')}>Retour à la section des produits</Button>
 
       <Box mt={5}>
-        <Text fontSize="2xl">Produit {id}</Text>
-        <Image src={`/product${id}.jpg`} alt={`Produit ${id}`} width={300} height={300} />
+        <Text fontSize="2xl">{product.name}</Text>
+        <Image src={product.image} alt={product.name} width={300} height={300} />
         <Text mt={3}>Prix de base : €{basePrices[id]}</Text>
         <Text mt={3}>Choisir une couleur :</Text>
         <Box>
-          <Button onClick={() => handleColorChange('red')}>Rouge</Button>
-          <Button onClick={() => handleColorChange('blue')}>Bleu</Button>
-          <Button onClick={() => handleColorChange('green')}>Vert</Button>
+          {product.colors.map(colorOption => (
+            <Button key={colorOption} onClick={() => handleColorChange(colorOption)}>{colorOption}</Button>
+          ))}
         </Box>
         <Text mt={3}>Choisir une broderie :</Text>
         <Box>
-          <Button onClick={() => handleEmbroideryChange('double_broderie_grande_et_petite')}>Double broderie grande et petite (+€3.5)</Button>
-          <Button onClick={() => handleEmbroideryChange('double_broderie_grande')}>Double broderie grande (+€5.0)</Button>
-          <Button onClick={() => handleEmbroideryChange('double_broderie_petite')}>Double broderie petite (+€2.0)</Button>
+          {product.embroideryOptions.map(option => (
+            <Button key={option.type} onClick={() => handleEmbroideryChange(option.type)}>{option.label}</Button>
+          ))}
         </Box>
         <Text mt={3}>Prix final : €{price.toFixed(2)}</Text>
         <Text mt={3}>Préciser la position souhaitée de(s) broderie(s) :</Text>
@@ -79,4 +78,31 @@ export default function ProductDetail() {
       </Box>
     </Box>
   );
+};
+
+// Simuler les données du produit pour l'exemple
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  // En fonction de l'ID, récupérez les détails du produit depuis une source de données
+  const products = {
+    1: {
+      name: 'Sweat Personnalisé',
+      image: '/image3-fond.jpg',
+      colors: ['Rouge', 'Bleu', 'Vert'],
+      embroideryOptions: [
+        { type: 'double_broderie_grande_et_petite', label: 'Double broderie grande et petite (+€3.5)' },
+        { type: 'double_broderie_grande', label: 'Double broderie grande (+€5.0)' },
+        { type: 'double_broderie_petite', label: 'Double broderie petite (+€2.0)' },
+      ]
+    },
+    // Ajoutez d'autres produits ici
+  };
+
+  return {
+    props: {
+      product: products[id] || {},
+    },
+  };
 }
+
+export default ProductDetails;
