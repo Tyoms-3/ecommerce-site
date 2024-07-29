@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Box, Text, Button, Image, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import '../../styles/global.css'; // Assurez-vous que le chemin est correct
 
 const ProductDetails = ({ product }) => {
   const router = useRouter();
@@ -55,7 +56,7 @@ const ProductDetails = ({ product }) => {
 
       <Button onClick={() => router.push('/product')}>Retour à la section des produits</Button>
 
-      <Box mt={5}>
+      <Box mt={5} className="productDetailsContainer">
         <Text fontSize="2xl">{product.name}</Text>
         <Image src={product.image} alt={product.name} width={300} height={300} />
         <Text mt={3}>Prix de base : €{basePrices[id]}</Text>
