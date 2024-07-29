@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Box, Text, Button, Image, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import '../../styles/global.css'; // Assurez-vous que le chemin est correct
+import '../../styles/globals.css'; // Assurez-vous que le chemin est correct
 
 const Product3 = ({ product }) => {
   const router = useRouter();
