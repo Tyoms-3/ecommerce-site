@@ -44,7 +44,7 @@ const ProductDetails = ({ product }) => {
   const handlePayment = () => {
     // Redirection vers PayPal avec la clé API
     // Remplacez 'YOUR_PAYPAL_API_KEY' par votre clé API réelle
-    window.location.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=YOUR_PAYPAL_API_KEY&amount=${price}&currency_code=EUR&item_name=Produit ${id}`;
+    window.location.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=EBZ-akuTSAgkGBVScJLZH6wQhKqCF4bx9eJFsDu9nYv1i50hdj-Q9z4eMUZPsXvu7EU4JtAVmnxLiLup&amount=${price}&currency_code=EUR&item_name=Produit ${id}`;
   };
 
   return (
