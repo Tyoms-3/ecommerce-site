@@ -59,7 +59,6 @@ body, html {
   flex-wrap: wrap; /* Permettre aux cadres de se déplacer à la ligne suivante si nécessaire */
 }
 
-/* Style pour les cartes */
 .card {
   background-color: #fff;
   border: 1px solid #ddd;
