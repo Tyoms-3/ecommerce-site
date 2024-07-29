@@ -103,6 +103,9 @@ body, html {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  background-color: #000; /* Fond noir pour la page produit */
+  color: #fff; /* Texte en blanc pour le contraste */
+  height: 100vh; /* Hauteur de la vue pour la page produit */
 }
 
 .productImage {
@@ -151,6 +154,17 @@ body, html {
   border-radius: 5px;
   border: 1px solid #ccc;
   resize: vertical;
+}
+
+.buttonBack {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #B5A1A0; /* Couleur de fond */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 /* Media Queries */
