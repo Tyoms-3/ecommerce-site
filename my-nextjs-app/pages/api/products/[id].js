@@ -1,21 +1,15 @@
-// pages/api/products/[id].js
 import { getProductById } from '../../../lib/products';
 
 export default function handler(req, res) {
   const { id } = req.query;
-
-  // Assurez-vous que l'ID est bien un nombre
-  if (!id || isNaN(id)) {
-    return res.status(400).json({ message: 'Invalid product ID' });
-  }
-
-  console.log('Requested product ID:', id); // Debugging: Check the requested ID
-
+  console.log('Requested product ID:', id); // Affiche l'ID demandé
   const product = getProductById(id);
 
   if (product) {
+    console.log('Product found:', product); // Affiche le produit trouvé
     res.status(200).json(product);
   } else {
+    console.log('Product not found'); // Affiche si le produit n'est pas trouvé
     res.status(404).json({ message: 'Product not found' });
   }
 }
