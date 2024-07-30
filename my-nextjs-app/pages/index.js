@@ -1,92 +1,130 @@
-import Head from 'next/head';
-import { Box, Text, Button, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-ui/react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-const initialOptions = {
-  clientId: "EBZ-akuTSAgkGBVScJLZH6wQhKqCF4bx9eJFsDu9nYv1i50hdj-Q9z4eMUZPsXvu7EU4JtAVmnxLiLup",
-  currency: "EUR",
-};
-
-export default function Home() {
+const ProductPage = () => {
   const router = useRouter();
+  const { id } = router.query;
 
-  const handleProductClick = (productId) => {
-    router.push(`/product/${productId}`);
+  const [product, setProduct] = useState(null);
+  const [color, setColor] = useState('');
+  const [embroidery, setEmbroidery] = useState('');
+  const [price, setPrice] = useState(20); // Set default price based on the product
+
+  useEffect(() => {
+    if (id) {
+      // Fetch product data
+      axios.get(`/api/products/${id}`)
+        .then(response => {
+          setProduct(response.data);
+          // Optionally set the default price here
+        })
+        .catch(error => console.error('Error fetching product data:', error));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const updatePrice = () => {
+      let newPrice = product ? product.price : 20; // Reset to default price based on the product
+      switch (embroidery) {
+        case 'doubleBroderieGrandePetite':
+          newPrice += 3.5;
+          break;
+        case 'doubleBroderieGrande':
+          newPrice += 5;
+          break;
+        case 'doubleBroderiePetite':
+          newPrice += 2;
+          break;
+        default:
+          break;
+      }
+      setPrice(newPrice);
+    };
+    updatePrice();
+  }, [embroidery, product]);
+
+  const handleEmbroideryChange = (value) => {
+    setEmbroidery(value);
   };
+
+  if (!product) return <div>Loading...</div>;
 
   return (
     <Box>
-      <Head>
-        <title>OneTMD - E-commerce</title>
-      </Head>
-      
-      {/* Section principale avec image de fond */}
-      <Box className="sectionPrincipale" position="relative" overflow="hidden">
-        <Box className="contenuTexte" position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center" color="white" p={4}>
-          <Text className="titrePrincipal" fontSize={{ base: '6vw', md: '5vw', lg: '4vw' }} fontWeight="bold">
-            L'attention à portée de main
-          </Text>
-          <Text className="slogan" fontSize={{ base: '3vw', md: '2.5vw', lg: '2vw' }} mt={2}>
-            Exprimez votre amour en offrant et partageant des moments précieux et uniques où chaque détail compte.
-          </Text>
-        </Box>
+      <Box textAlign="center" color="white" bg="teal.500" p={4}>
+        <Text fontSize="4xl">Détail du produit</Text>
       </Box>
-      
-      {/* Section des produits */}
-      <Box className="newSection" display="flex" flexWrap="wrap" justifyContent="space-around" p={4}>
-        <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center" width={{ base: '90%', sm: '45%', md: '30%' }} mb={4}>
-          <Image src="/image3-fond.jpg" alt="Sweat Personnalisé" borderRadius="md" />
-          <Text as="h3" fontSize="xl" mt={2}>Sweat Personnalisé</Text>
-          <Text mt={2}>Description du produit 1.</Text>
-          <Text className="price" mt={2} fontSize="lg">€20.00</Text>
-          <PayPalScriptProvider options={initialOptions}>
-            <PayPalButtons
-              createOrder={(data, actions) => {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: "20.00", // Montant du produit
-                      },
-                    },
-                  ],
-                });
-              }}
-              onApprove={async (data, actions) => {
-                const details = await actions.order.capture();
-                alert('Transaction completed by ' + details.payer.name.given_name);
-              }}
-            />
-          </PayPalScriptProvider>
+
+      <Box p={4}>
+        <Button onClick={() => router.back()}>Retour</Button>
+      </Box>
+
+      <Box p={4} display="flex" flexWrap="wrap">
+        <Box flex="1" p={4} minW="300px">
+          <img src={product.imageUrl} alt={product.name} style={{ maxWidth: '100%', borderRadius: '8px' }} />
         </Box>
 
-        <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center" width={{ base: '90%', sm: '45%', md: '30%' }} mb={4}>
-          <Image src="/image2.jpg" alt="Pyjama Personnalisé" borderRadius="md" />
-          <Text as="h3" fontSize="xl" mt={2}>Pyjama Personnalisé</Text>
-          <Text mt={2}>Description du produit 2.</Text>
-          <Text className="price" mt={2} fontSize="lg">€25.00</Text>
-          <PayPalScriptProvider options={initialOptions}>
-            <PayPalButtons
-              createOrder={(data, actions) => {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: "25.00", // Montant du produit
-                      },
-                    },
-                  ],
-                });
-              }}
-              onApprove={async (data, actions) => {
-                const details = await actions.order.capture();
-                alert('Transaction completed by ' + details.payer.name.given_name);
-              }}
-            />
-          </PayPalScriptProvider>
+        <Box flex="1" p={4} bg="#B5A1A0" borderRadius="8px">
+          <Text fontSize="2xl" mb={4}>Prix: €{price.toFixed(2)}</Text>
+
+          <Box mb={4}>
+            <Text>Choix de la couleur:</Text>
+            <Stack direction="row" spacing={4}>
+              <Box
+                bg="red"
+                w="20px"
+                h="20px"
+                borderRadius="full"
+                cursor="pointer"
+                border={color === 'red' ? '2px solid black' : 'none'}
+                onClick={() => setColor('red')}
+              />
+              <Box
+                bg="blue"
+                w="20px"
+                h="20px"
+                borderRadius="full"
+                cursor="pointer"
+                border={color === 'blue' ? '2px solid black' : 'none'}
+                onClick={() => setColor('blue')}
+              />
+              <Box
+                bg="green"
+                w="20px"
+                h="20px"
+                borderRadius="full"
+                cursor="pointer"
+                border={color === 'green' ? '2px solid black' : 'none'}
+                onClick={() => setColor('green')}
+              />
+            </Stack>
+          </Box>
+
+          <Box mb={4}>
+            <Text>Choix de la broderie:</Text>
+            <RadioGroup onChange={handleEmbroideryChange} value={embroidery}>
+              <Stack direction="column">
+                <Radio value="grandeBroderie">Grande broderie</Radio>
+                <Radio value="petiteBroderie">Petite broderie</Radio>
+                <Radio value="doubleBroderieGrandePetite">Double broderie (Grande et petite)</Radio>
+                <Radio value="doubleBroderieGrande">Double broderie (Grande)</Radio>
+                <Radio value="doubleBroderiePetite">Double broderie (Petite)</Radio>
+              </Stack>
+            </RadioGroup>
+          </Box>
+
+          <Box mb={4}>
+            <Text>Espace commentaire:</Text>
+            <Textarea placeholder="Préciser la position souhaitée de(s) broderie(s)" />
+          </Box>
+
+          <Button colorScheme="teal">Payer</Button>
         </Box>
       </Box>
     </Box>
   );
-}
+};
+
+export default ProductPage;
