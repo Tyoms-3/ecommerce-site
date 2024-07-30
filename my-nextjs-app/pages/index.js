@@ -1,6 +1,12 @@
 import Head from 'next/head';
 import { Box, Text, Button, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+const initialOptions = {
+  clientId: "YOUR_PAYPAL_CLIENT_ID",
+  currency: "EUR",
+};
 
 export default function Home() {
   const router = useRouter();
@@ -34,7 +40,25 @@ export default function Home() {
           <Text as="h3" fontSize="xl" mt={2}>Sweat Personnalisé</Text>
           <Text mt={2}>Description du produit 1.</Text>
           <Text className="price" mt={2} fontSize="lg">€20.00</Text>
-          <Button mt={4} onClick={() => handleProductClick(1)} colorScheme="teal">Voir plus</Button>
+          <PayPalScriptProvider options={initialOptions}>
+            <PayPalButtons
+              createOrder={(data, actions) => {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: "20.00", // Montant du produit
+                      },
+                    },
+                  ],
+                });
+              }}
+              onApprove={async (data, actions) => {
+                const details = await actions.order.capture();
+                alert('Transaction completed by ' + details.payer.name.given_name);
+              }}
+            />
+          </PayPalScriptProvider>
         </Box>
 
         <Box className="card" bg="white" borderWidth={1} borderRadius="md" p={4} textAlign="center" width={{ base: '90%', sm: '45%', md: '30%' }} mb={4}>
@@ -42,12 +66,27 @@ export default function Home() {
           <Text as="h3" fontSize="xl" mt={2}>Pyjama Personnalisé</Text>
           <Text mt={2}>Description du produit 2.</Text>
           <Text className="price" mt={2} fontSize="lg">€25.00</Text>
-          <Button mt={4} onClick={() => handleProductClick(2)} colorScheme="teal">Voir plus</Button>
+          <PayPalScriptProvider options={initialOptions}>
+            <PayPalButtons
+              createOrder={(data, actions) => {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: "25.00", // Montant du produit
+                      },
+                    },
+                  ],
+                });
+              }}
+              onApprove={async (data, actions) => {
+                const details = await actions.order.capture();
+                alert('Transaction completed by ' + details.payer.name.given_name);
+              }}
+            />
+          </PayPalScriptProvider>
         </Box>
-
-        {/* Ajoutez d'autres cartes de produit ici */}
       </Box>
     </Box>
   );
 }
-
