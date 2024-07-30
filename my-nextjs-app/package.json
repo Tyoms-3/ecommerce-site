@@ -18,7 +18,8 @@
     "@emotion/styled": "^11.11.5", 
     "framer-motion": "^11.3.6",    
     "axios": "^1.7.2", 
-    "react-headroom": "^3.2.1"
+    "react-headroom": "^3.2.1",
+    "@paypal/react-paypal-js": "^8.5.0" // Ajoutez cette ligne
   },
   "devDependencies": {
     "eslint": "^8.0.0",
@@ -42,3 +43,4 @@
   },
   "homepage": "https://github.com/Tyoms-3/ecommerce-site/tree/main/my-nextjs-app"
 }
+
