@@ -9,11 +9,11 @@
   padding: 0 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-content: space-between;
+  position: relative; /* Ajouté pour s'assurer que les éléments positionnés absolument se réfèrent à ce conteneur */
 }
 
 .logo {
   height: 45px;
-  margin-left: auto;
 }
 
 .titrePrincipal {
@@ -22,9 +22,9 @@
   font-family: 'Arial', sans-serif;
   margin: 0;
   text-transform: uppercase;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Ajustement pour centrer le texte sans position absolue */
+  flex-grow: 1;
+  text-align: center;
 }
 
 .menu {
@@ -39,6 +39,7 @@
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   transform: translateX(100%);
   transition: transform 0.3s ease;
+  z-index: 1001; /* Assurez-vous que le menu est au-dessus du reste du contenu */
 }
 
 .menu.open {
