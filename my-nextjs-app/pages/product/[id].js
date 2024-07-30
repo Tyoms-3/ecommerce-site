@@ -1,16 +1,28 @@
+// pages/product/[id].js
 import { useRouter } from 'next/router';
 import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-ui/react';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-import fs from 'fs';
-import path from 'path';
 
-const ProductPage = ({ product }) => {
+const ProductPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const [product, setProduct] = useState(null);
   const [color, setColor] = useState('');
   const [embroidery, setEmbroidery] = useState('');
-  const [price, setPrice] = useState(product.price || 20); // Prix par défaut
+  const [price, setPrice] = useState(20); // Set default price based on the product
+
+  useEffect(() => {
+    if (id) {
+      axios.get(`/api/products/${id}`)
+        .then(response => {
+          setProduct(response.data);
+          setPrice(response.data.price); // Set the price based on the product data
+        })
+        .catch(error => console.error('Error fetching product data:', error));
+    }
+  }, [id]);
 
   useEffect(() => {
     const updatePrice = () => {
@@ -37,7 +49,24 @@ const ProductPage = ({ product }) => {
     setEmbroidery(value);
   };
 
-  if (!product) return <Text>Loading...</Text>;
+  const handleOrderSubmit = () => {
+    axios.post('/api/orders', {
+      productId: id,
+      color,
+      embroidery,
+      price,
+      comment: '', // Add a comment field if needed
+    })
+    .then(response => {
+      alert('Order placed successfully!');
+    })
+    .catch(error => {
+      console.error('Error placing order:', error);
+      alert('Failed to place order.');
+    });
+  };
+
+  if (!product) return <div>Loading...</div>;
 
   return (
     <Box>
@@ -51,7 +80,7 @@ const ProductPage = ({ product }) => {
 
       <Box p={4} display="flex" flexWrap="wrap">
         <Box flex="1" p={4} minW="300px">
-          <img src={product.imageUrl || '/default-image.jpg'} alt={product.name || 'Produit'} style={{ maxWidth: '100%', borderRadius: '8px' }} />
+          <img src={product.imageUrl} alt={product.name} style={{ maxWidth: '100%', borderRadius: '8px' }} />
         </Box>
 
         <Box flex="1" p={4} bg="#B5A1A0" borderRadius="8px">
@@ -108,44 +137,11 @@ const ProductPage = ({ product }) => {
             <Textarea placeholder="Préciser la position souhaitée de(s) broderie(s)" />
           </Box>
 
-          <Button colorScheme="teal">Payer</Button>
+          <Button colorScheme="teal" onClick={handleOrderSubmit}>Passer la commande</Button>
         </Box>
       </Box>
     </Box>
   );
 };
-
-export async function getStaticProps({ params }) {
-  const { id } = params;
-
-  // Lecture des données depuis le fichier JSON
-  const filePath = path.join(process.cwd(), 'data/products.json');
-  const jsonData = fs.readFileSync(filePath);
-  const products = JSON.parse(jsonData);
-  
-  // Trouver le produit correspondant à l'ID
-  const product = products.find(product => product.id === id) || null;
-
-  return {
-    props: {
-      product,
-    },
-  };
-}
-
-export async function getStaticPaths() {
-  const filePath = path.join(process.cwd(), 'data/products.json');
-  const jsonData = fs.readFileSync(filePath);
-  const products = JSON.parse(jsonData);
-  
-  const paths = products.map(product => ({
-    params: { id: product.id },
-  }));
-
-  return {
-    paths,
-    fallback: 'blocking',
-  };
-}
 
 export default ProductPage;
