@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const initialOptions = {
-  clientId: "YOUR_PAYPAL_CLIENT_ID",
+  clientId: "EBZ-akuTSAgkGBVScJLZH6wQhKqCF4bx9eJFsDu9nYv1i50hdj-Q9z4eMUZPsXvu7EU4JtAVmnxLiLup",
   currency: "EUR",
 };
 
