@@ -19,10 +19,11 @@ const ProductPage = () => {
       axios.get(`/api/products/${id}`)
         .then(response => {
           setProduct(response.data);
+          setPrice(response.data.price); // Met à jour le prix en fonction du produit
           setLoading(false);
         })
         .catch(error => {
-          setError(error);
+          setError('Erreur lors du chargement du produit.');
           setLoading(false);
         });
     }
@@ -30,7 +31,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     const updatePrice = () => {
-      let newPrice = 20;
+      let newPrice = product ? product.price : 20; // Utilise le prix du produit ou le prix par défaut
       switch (embroidery) {
         case 'doubleBroderieGrandePetite':
           newPrice += 3.5;
@@ -47,14 +48,14 @@ const ProductPage = () => {
       setPrice(newPrice);
     };
     updatePrice();
-  }, [embroidery]);
+  }, [embroidery, product]);
 
   const handleEmbroideryChange = (value) => {
     setEmbroidery(value);
   };
 
   if (loading) return <Text>Chargement...</Text>;
-  if (error) return <Text>Erreur lors du chargement du produit.</Text>;
+  if (error) return <Text>{error}</Text>;
 
   return (
     <Box>
@@ -68,7 +69,7 @@ const ProductPage = () => {
 
       <Box p={4} display="flex" flexWrap="wrap">
         <Box flex="1" p={4} minW="300px">
-          <img src={`/image3-fond.jpg`} alt={`Product ${id}`} style={{ maxWidth: '100%', borderRadius: '8px' }} />
+          <img src={product?.imageUrl || `/image3-fond.jpg`} alt={`Product ${id}`} style={{ maxWidth: '100%', borderRadius: '8px' }} />
         </Box>
 
         <Box flex="1" p={4} bg="#B5A1A0" borderRadius="8px">
