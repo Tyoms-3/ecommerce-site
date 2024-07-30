@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Utilisez la dernière version stable
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3  # Utilisez la dernière version stable
         with:
           node-version: '14'
 
@@ -28,6 +28,6 @@ jobs:
       - name: Deploy to Netlify
         uses: netlify/actions/cli@v1
         with:
-          args: deploy --prod --dir=.next
+          args: deploy --prod --dir=.next  # Assurez-vous que le répertoire de build est correct
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
