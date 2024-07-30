@@ -1,9 +1,13 @@
 // pages/api/products/[id].js
-import { products } from '../../../data/products'; // Assurez-vous d'avoir un fichier `data/products.js`
+import fs from 'fs';
+import path from 'path';
 
 export default function handler(req, res) {
   const { id } = req.query;
-  const product = products.find((p) => p.id === parseInt(id, 10));
+  const filePath = path.join(process.cwd(), 'public/products.json');
+  const jsonData = fs.readFileSync(filePath);
+  const products = JSON.parse(jsonData);
+  const product = products.find(product => product.id === id);
 
   if (product) {
     res.status(200).json(product);
