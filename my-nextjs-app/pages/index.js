@@ -2,6 +2,12 @@ import { useRouter } from 'next/router';
 import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-ui/react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+
+const initialOptions = {
+  clientId: "EBZ-akuTSAgkGBVScJLZH6wQhKqCF4bx9eJFsDu9nYv1i50hdj-Q9z4eMUZPsXvu7EU4JtAVmnxLiLup",
+  currency: "EUR",
+};
 
 const ProductPage = () => {
   const router = useRouter();
@@ -120,7 +126,25 @@ const ProductPage = () => {
             <Textarea placeholder="Préciser la position souhaitée de(s) broderie(s)" />
           </Box>
 
-          <Button colorScheme="teal">Payer</Button>
+          <PayPalScriptProvider options={initialOptions}>
+            <PayPalButtons
+              createOrder={(data, actions) => {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: price.toFixed(2), // Montant du produit
+                      },
+                    },
+                  ],
+                });
+              }}
+              onApprove={async (data, actions) => {
+                const details = await actions.order.capture();
+                alert('Transaction completed by ' + details.payer.name.given_name);
+              }}
+            />
+          </PayPalScriptProvider>
         </Box>
       </Box>
     </Box>
