@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { Box, Button, Text, Stack, Radio, RadioGroup, Textarea } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 
+// Assurez-vous que vous importez ou accédez correctement à vos données produit.
 const ProductPage = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -34,6 +35,13 @@ const ProductPage = () => {
 
   const handleEmbroideryChange = (value) => {
     setEmbroidery(value);
+  };
+
+  // Placeholder for product data (replace with actual data fetching logic)
+  const product = {
+    name: "Produit " + id,
+    description: "Description du produit " + id,
+    price: 20
   };
 
   return (
