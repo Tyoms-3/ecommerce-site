@@ -19,13 +19,13 @@ body, html {
 .sectionPrincipale {
   position: relative;
   width: 100%;
-  height: 150vh; /* Utilisation de 150vh pour couvrir toute la hauteur de la vue */
+  height: 150vh; /* Assurez-vous que la hauteur est suffisante pour couvrir le contenu */
   overflow: hidden;
   background-image: url('/image3-fond.jpg'); /* Assurez-vous que le chemin est correct */
-  background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
-  background-position: center; /* Centre l'image */
-  background-repeat: no-repeat; /* Évite la répétition de l'image */
-  padding: 0; /* Retire le padding pour cette section spécifique */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
 }
 
 .contenuTexte {
@@ -34,29 +34,29 @@ body, html {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: #ffffff; /* Couleur du texte blanc */
-  padding: 20px; /* Ajoute un peu de padding pour que le texte ne touche pas les bords */
+  color: #ffffff;
+  padding: 20px;
 }
 
 .titrePrincipal {
-  font-size: 4vw; /* Utilisation des unités viewport pour une taille de texte responsive */
+  font-size: 4vw;
   font-weight: bold;
-  margin: 0; /* Enlève les marges par défaut */
+  margin: 0;
 }
 
 .slogan {
-  font-size: 2vw; /* Utilisation des unités viewport pour une taille de texte responsive */
-  margin-top: 10px; /* Ajuste l'espacement au-dessus du slogan */
+  font-size: 2vw;
+  margin-top: 10px;
 }
 
 /* Nouvelle section */
 .newSection {
-  background-color: #B5A1A0; /* Couleur de fond */
-  padding: 50px 20px; /* Padding pour la section */
+  background-color: #B5A1A0;
+  padding: 50px 20px;
   display: flex;
-  justify-content: space-around; /* Centrer les cadres horizontalement */
-  align-items: flex-start; /* Aligner les cadres sur la même hauteur */
-  flex-wrap: wrap; /* Permettre aux cadres de se déplacer à la ligne suivante si nécessaire */
+  flex-wrap: wrap; /* Assurez-vous que les cartes s'enroulent correctement */
+  gap: 20px; /* Espacement entre les cartes */
+  justify-content: center; /* Centrer les cartes horizontalement */
 }
 
 .card {
@@ -64,14 +64,13 @@ body, html {
   border: 1px solid #ddd;
   padding: 20px;
   text-align: center;
-  width: 30%;
-  margin: 10px; /* Espacement entre les cartes */
-  transition: transform 0.3s ease; /* Animation pour l'agrandissement */
-  box-sizing: border-box; /* Inclure padding et border dans la largeur */
+  width: calc(33.333% - 20px); /* Ajuster la largeur pour trois cartes avec un espacement de 20px */
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
-  transform: scale(1.05); /* Agrandissement au survol */
+  transform: scale(1.05);
 }
 
 .card img {
@@ -92,7 +91,7 @@ body, html {
 
 .card .price {
   margin-top: 10px;
-  font-size: 1.2em; /* Ajout d'une unité de mesure */
+  font-size: 1.2em;
   color: #000;
   font-weight: bold;
 }
@@ -103,9 +102,9 @@ body, html {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #000; /* Fond noir pour la page produit */
-  color: #fff; /* Texte en blanc pour le contraste */
-  height: 100vh; /* Hauteur de la vue pour la page produit */
+  background-color: #000;
+  color: #fff;
+  height: 100vh;
 }
 
 .productImage {
@@ -114,7 +113,7 @@ body, html {
 }
 
 .productDetails {
-  background-color: #B5A1A0; /* Couleur de fond */
+  background-color: #B5A1A0;
   padding: 20px;
   border-radius: 10px;
   margin-top: 20px;
@@ -159,7 +158,7 @@ body, html {
 .buttonBack {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #B5A1A0; /* Couleur de fond */
+  background-color: #B5A1A0;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -172,15 +171,15 @@ body, html {
 /* Petits écrans (smartphones en mode portrait) */
 @media (max-width: 600px) {
   .sectionPrincipale {
-    height: 150vh; /* Couvrir toute la hauteur de l'écran */
+    height: 150vh;
   }
 
   .titrePrincipal {
-    font-size: 6vw; /* Ajustez la taille du titre pour les petits écrans */
+    font-size: 6vw;
   }
 
   .slogan {
-    font-size: 3vw; /* Ajustez la taille du slogan pour les petits écrans */
+    font-size: 3vw;
   }
 
   .newSection {
@@ -196,15 +195,15 @@ body, html {
 /* Écrans moyens (tablettes en mode portrait et petits ordinateurs portables) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .sectionPrincipale {
-    height: 150vh; /* Couvrir toute la hauteur de l'écran */
+    height: 150vh;
   }
 
   .titrePrincipal {
-    font-size: 5vw; /* Ajustez la taille du titre pour les écrans moyens */
+    font-size: 5vw;
   }
 
   .slogan {
-    font-size: 2.5vw; /* Ajustez la taille du slogan pour les écrans moyens */
+    font-size: 2.5vw;
   }
 
   .newSection {
@@ -220,14 +219,14 @@ body, html {
 /* Grands écrans (grands ordinateurs de bureau) */
 @media (min-width: 1025px) {
   .sectionPrincipale {
-    height: 150vh; /* Couvrir toute la hauteur de l'écran */
+    height: 150vh;
   }
 
   .titrePrincipal {
-    font-size: 4vw; /* Ajustez la taille du titre pour les grands écrans */
+    font-size: 4vw;
   }
 
   .slogan {
-    font-size: 2vw; /* Ajustez la taille du slogan pour les grands écrans */
+    font-size: 2vw;
   }
 }
