@@ -1,14 +1,12 @@
 // pages/api/orders/index.js
-export default function handler(req, res) {
+
+export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { productId, color, embroidery, price } = req.body;
-
-    // Vous pouvez ici enregistrer la commande dans une base de données
-    // Par exemple, vous pouvez utiliser une base de données NoSQL comme MongoDB
-
-    // Réponse simulée
-    res.status(201).json({ message: 'Order created successfully' });
+    const order = req.body; // Vous pouvez ajouter une logique pour enregistrer cette commande dans une base de données
+    // Simulez la création d'une commande (à remplacer par une intégration réelle si nécessaire)
+    res.status(201).json({ message: 'Order created successfully', order });
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
