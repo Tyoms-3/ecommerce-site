@@ -1,20 +1,36 @@
 import { useRouter } from 'next/router';
 import { Box, Button, Text, Stack, Radio, RadioGroup, Textarea } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-// Assurez-vous que vous importez ou accédez correctement à vos données produit.
 const ProductPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const [color, setColor] = useState('');
   const [embroidery, setEmbroidery] = useState('');
-  const [price, setPrice] = useState(20); // Set default price based on the product
+  const [price, setPrice] = useState(20);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Effect to update price when embroidery changes
+  useEffect(() => {
+    if (id) {
+      axios.get(`/api/products/${id}`)
+        .then(response => {
+          setProduct(response.data);
+          setLoading(false);
+        })
+        .catch(error => {
+          setError(error);
+          setLoading(false);
+        });
+    }
+  }, [id]);
+
   useEffect(() => {
     const updatePrice = () => {
-      let newPrice = 20; // Reset to default price based on the product
+      let newPrice = 20;
       switch (embroidery) {
         case 'doubleBroderieGrandePetite':
           newPrice += 3.5;
@@ -37,12 +53,8 @@ const ProductPage = () => {
     setEmbroidery(value);
   };
 
-  // Placeholder for product data (replace with actual data fetching logic)
-  const product = {
-    name: "Produit " + id,
-    description: "Description du produit " + id,
-    price: 20
-  };
+  if (loading) return <Text>Chargement...</Text>;
+  if (error) return <Text>Erreur lors du chargement du produit.</Text>;
 
   return (
     <Box>
