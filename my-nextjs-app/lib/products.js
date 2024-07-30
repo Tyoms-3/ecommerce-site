@@ -2,15 +2,15 @@
 
 // Simule des données de produits
 const products = [
-  { id: 1, name: 'Sweat personnalisé', price: 20, imageUrl: '/image1.jpg' },
-  { id: 2, name: 'Pull personnalisé', price: 30, imageUrl: '/image2.jpg' },
-  { id: 3, name: 'Pyjama personnalisé', price: 25, imageUrl: '/image3.jpg' }
-]
+  { id: 1, name: 'Produit 1', description: 'Description du produit 1', price: 10, imageUrl: '/image1.jpg' },
+  { id: 2, name: 'Produit 2', description: 'Description du produit 2', price: 20, imageUrl: '/image2.jpg' },
+  { id: 3, name: 'Produit 3', description: 'Description du produit 3', price: 30, imageUrl: '/image3.jpg' },
+];
 
 export const getProductById = (id) => {
   return products.find((product) => product.id === parseInt(id, 10));
-}
+};
 
 export const getAllProducts = () => {
   return products;
-}
+};
