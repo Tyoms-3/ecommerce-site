@@ -5,6 +5,9 @@ body, html {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  -webkit-text-size-adjust: 100%; /* Pour WebKit et Blink */
+  -ms-text-size-adjust: 100%; /* Pour Internet Explorer */
+  text-size-adjust: 100%; /* Spécification standard */
 }
 
 #__next {
@@ -28,6 +31,7 @@ body, html {
   padding: 0;
 }
 
+/* Styles pour les éléments de texte */
 .contenuTexte {
   position: absolute;
   top: 50%;
@@ -38,12 +42,14 @@ body, html {
   padding: 20px;
 }
 
+/* Styles pour le titre principal */
 .titrePrincipal {
   font-size: 4vw;
   font-weight: bold;
   margin: 0;
 }
 
+/* Styles pour le slogan */
 .slogan {
   font-size: 2vw;
   margin-top: 10px;
@@ -59,6 +65,7 @@ body, html {
   justify-content: center; /* Centrer les cartes horizontalement */
 }
 
+/* Styles pour les cartes */
 .card {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -69,26 +76,31 @@ body, html {
   transition: transform 0.3s ease;
 }
 
+/* Effet de survol pour les cartes */
 .card:hover {
   transform: scale(1.05);
 }
 
+/* Styles pour les images dans les cartes */
 .card img {
   max-width: 100%;
   height: auto;
 }
 
+/* Styles pour les titres des cartes */
 .card h3 {
   margin: 10px 0;
   font-size: 1.5em;
 }
 
+/* Styles pour le texte dans les cartes */
 .card p {
   margin: 10px 0;
   font-size: 1em;
   color: #333;
 }
 
+/* Styles pour le prix dans les cartes */
 .card .price {
   margin-top: 10px;
   font-size: 1.2em;
@@ -107,11 +119,13 @@ body, html {
   height: 100vh;
 }
 
+/* Styles pour les images de produit */
 .productImage {
   max-width: 100%;
   height: auto;
 }
 
+/* Styles pour les détails du produit */
 .productDetails {
   background-color: #B5A1A0;
   padding: 20px;
@@ -121,17 +135,20 @@ body, html {
   max-width: 600px;
 }
 
+/* Styles pour le prix dans les détails du produit */
 .productDetails .price {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
+/* Styles pour les options de couleur et de broderie */
 .productDetails .colorOptions,
 .productDetails .embroideryOptions {
   margin-bottom: 20px;
 }
 
+/* Styles pour les options de couleur et de broderie individuelles */
 .productDetails .colorOptions div,
 .productDetails .embroideryOptions div {
   display: inline-block;
@@ -142,11 +159,13 @@ body, html {
   cursor: pointer;
 }
 
+/* Styles pour les labels des options de broderie */
 .productDetails .embroideryOptions label {
   display: block;
   margin-bottom: 5px;
 }
 
+/* Styles pour les zones de texte */
 .productDetails textarea {
   width: 100%;
   padding: 10px;
@@ -155,6 +174,7 @@ body, html {
   resize: vertical;
 }
 
+/* Styles pour le bouton de retour */
 .buttonBack {
   margin-top: 20px;
   padding: 10px 20px;
