@@ -3,6 +3,7 @@ import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-u
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import Head from 'next/head';
 
 const initialOptions = {
   clientId: "EBZ-akuTSAgkGBVScJLZH6wQhKqCF4bx9eJFsDu9nYv1i50hdj-Q9z4eMUZPsXvu7EU4JtAVmnxLiLup",
@@ -59,8 +60,12 @@ const ProductPage = () => {
 
   return (
     <Box>
+      <Head>
+        <title>{product.name} - One TMD</title> {/* Titre incluant le nom de la boutique */}
+      </Head>
+
       <Box textAlign="center" color="white" bg="teal.500" p={4}>
-        <Text fontSize="4xl">Détail du produit</Text>
+        <Text fontSize="4xl">Détail du produit - One TMD</Text> {/* Nom de la boutique dans l'en-tête */}
       </Box>
 
       <Box p={4}>
@@ -135,6 +140,7 @@ const ProductPage = () => {
                       amount: {
                         value: price.toFixed(2), // Montant du produit
                       },
+                      description: `Achat de ${product.name} chez One TMD`, // Description incluant le nom de la boutique
                     },
                   ],
                 });
