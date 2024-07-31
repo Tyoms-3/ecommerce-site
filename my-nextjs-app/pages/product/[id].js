@@ -1,4 +1,4 @@
-// pages/product/[id].j
+// pages/product/[id].js
 import { useRouter } from 'next/router';
 import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-ui/react';
 import axios from 'axios';
@@ -12,6 +12,7 @@ const ProductPage = () => {
   const [color, setColor] = useState('');
   const [embroidery, setEmbroidery] = useState('');
   const [price, setPrice] = useState(20); // Prix par défaut
+  const [comment, setComment] = useState(''); // Ajout de l'état pour le commentaire
 
   useEffect(() => {
     if (id) {
@@ -55,7 +56,7 @@ const ProductPage = () => {
       color,
       embroidery,
       price,
-      comment: '', // Ajoutez un champ commentaire si nécessaire
+      comment, // Utilisation de l'état pour le commentaire
     })
     .then(response => {
       alert('Commande passée avec succès!');
@@ -134,7 +135,11 @@ const ProductPage = () => {
 
           <Box mb={4}>
             <Text>Espace commentaire:</Text>
-            <Textarea placeholder="Préciser la position souhaitée de(s) broderie(s)" />
+            <Textarea 
+              placeholder="Préciser la position souhaitée de(s) broderie(s)" 
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
           </Box>
 
           <Button colorScheme="teal" onClick={handleOrderSubmit}>Passer la commande</Button>
