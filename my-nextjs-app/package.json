@@ -2,6 +2,7 @@
   "name": "OneTMD",
   "version": "1.0.8",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
+  "private" : true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
