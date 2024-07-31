@@ -18,43 +18,6 @@ body, html {
   padding: 0;
 }
 
-/* Styles pour la section principale */
-.sectionPrincipale {
-  position: relative;
-  width: 100%;
-  height: 150vh; /* Assurez-vous que la hauteur est suffisante pour couvrir le contenu */
-  overflow: hidden;
-  background-image: url('/image3-fond.jpg'); /* Assurez-vous que le chemin est correct */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 0;
-}
-
-/* Styles pour les éléments de texte */
-.contenuTexte {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #ffffff;
-  padding: 20px;
-}
-
-/* Styles pour le titre principal */
-.titrePrincipal {
-  font-size: 4vw;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Styles pour le slogan */
-.slogan {
-  font-size: 2vw;
-  margin-top: 10px;
-}
-
 /* Nouvelle section */
 .newSection {
   background-color: #B5A1A0;
