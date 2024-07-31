@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tyoms-3/ecommerce-site/tree/main/my-nextjs-app"
+    "url": "git+https://github.com/Tyoms-3/ecommerce-site.git"
   },
   "keywords": [
     "e-commerce",
@@ -44,7 +44,7 @@
   "author": "DEFFIEUX Thomas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Tyoms-3/ecommerce-site/tree/main/my-nextjs-app"
+    "url": "https://github.com/Tyoms-3/ecommerce-site/issues"
   },
-  "homepage": "https://github.com/Tyoms-3/ecommerce-site/tree/main/my-nextjs-app"
+  "homepage": "https://github.com/Tyoms-3/ecommerce-site"
 }
