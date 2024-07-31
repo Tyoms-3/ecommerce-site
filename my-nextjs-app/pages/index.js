@@ -25,7 +25,7 @@ const ProductPage = () => {
       axios.get(`/api/products/${id}`)
         .then(response => {
           setProduct(response.data);
-          // Optionally set the default price here
+          setPrice(response.data.price); // Set the default price from the product data
         })
         .catch(error => console.error('Error fetching product data:', error));
     }
@@ -61,11 +61,11 @@ const ProductPage = () => {
   return (
     <Box>
       <Head>
-        <title>{product.name} - One TMD</title> {/* Titre incluant le nom de la boutique */}
+        <title>{product.name} - One TMD</title>
       </Head>
 
       <Box textAlign="center" color="white" bg="teal.500" p={4}>
-        <Text fontSize="4xl">Détail du produit - One TMD</Text> {/* Nom de la boutique dans l'en-tête */}
+        <Text fontSize="4xl">Détail du produit - One TMD</Text>
       </Box>
 
       <Box p={4}>
@@ -83,33 +83,18 @@ const ProductPage = () => {
           <Box mb={4}>
             <Text>Choix de la couleur:</Text>
             <Stack direction="row" spacing={4}>
-              <Box
-                bg="red"
-                w="20px"
-                h="20px"
-                borderRadius="full"
-                cursor="pointer"
-                border={color === 'red' ? '2px solid black' : 'none'}
-                onClick={() => setColor('red')}
-              />
-              <Box
-                bg="blue"
-                w="20px"
-                h="20px"
-                borderRadius="full"
-                cursor="pointer"
-                border={color === 'blue' ? '2px solid black' : 'none'}
-                onClick={() => setColor('blue')}
-              />
-              <Box
-                bg="green"
-                w="20px"
-                h="20px"
-                borderRadius="full"
-                cursor="pointer"
-                border={color === 'green' ? '2px solid black' : 'none'}
-                onClick={() => setColor('green')}
-              />
+              {['red', 'blue', 'green'].map((clr) => (
+                <Box
+                  key={clr}
+                  bg={clr}
+                  w="20px"
+                  h="20px"
+                  borderRadius="full"
+                  cursor="pointer"
+                  border={color === clr ? '2px solid black' : 'none'}
+                  onClick={() => setColor(clr)}
+                />
+              ))}
             </Stack>
           </Box>
 
