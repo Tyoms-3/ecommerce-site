@@ -1,4 +1,4 @@
-// pages/product/[id].js
+// pages/product/[id].j
 import { useRouter } from 'next/router';
 import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-ui/react';
 import axios from 'axios';
@@ -11,14 +11,14 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [color, setColor] = useState('');
   const [embroidery, setEmbroidery] = useState('');
-  const [price, setPrice] = useState(20); // Set default price based on the product
+  const [price, setPrice] = useState(20); // Prix par défaut
 
   useEffect(() => {
     if (id) {
       axios.get(`/api/products/${id}`)
         .then(response => {
           setProduct(response.data);
-          setPrice(response.data.price); // Set the price based on the product data
+          setPrice(response.data.price); // Définit le prix basé sur les données du produit
         })
         .catch(error => console.error('Error fetching product data:', error));
     }
@@ -55,14 +55,14 @@ const ProductPage = () => {
       color,
       embroidery,
       price,
-      comment: '', // Add a comment field if needed
+      comment: '', // Ajoutez un champ commentaire si nécessaire
     })
     .then(response => {
-      alert('Order placed successfully!');
+      alert('Commande passée avec succès!');
     })
     .catch(error => {
       console.error('Error placing order:', error);
-      alert('Failed to place order.');
+      alert('Échec de la commande.');
     });
   };
 
