@@ -1,7 +1,7 @@
 // components/SectionPrincipale.js
 
 import React from 'react';
-import styles from '../styles/globals.css';
+import styles from '../styles/SectionPrincipale.module.css';
 
 const SectionPrincipale = () => {
     return (
@@ -15,4 +15,3 @@ const SectionPrincipale = () => {
 };
 
 export default SectionPrincipale;
-
