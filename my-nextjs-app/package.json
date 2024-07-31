@@ -1,6 +1,6 @@
 {
   "name": "OneTMD",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
   "private" : true,
   "scripts": {
@@ -23,7 +23,7 @@
     "@paypal/react-paypal-js": "^8.5.0" 
   },
   "devDependencies": {
-    "eslint": "^9.7.0",
+    "eslint": "^7.23.0",
     "eslint-config-next": "^14.2.5"
   },
   "repository": {
