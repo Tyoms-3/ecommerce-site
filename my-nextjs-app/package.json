@@ -2,29 +2,33 @@
   "name": "OneTMD",
   "version": "1.0.10",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
-  "private" : true,
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"  // Ajout du script de test
   },
   "dependencies": {
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@chakra-ui/react": "^2.8.2", 
-    "@chakra-ui/icons": "^2.1.1",  
-    "@emotion/react": "^11.11.4",  
-    "@emotion/styled": "^11.11.5", 
-    "framer-motion": "^11.3.6",    
-    "axios": "^1.7.2", 
+    "@chakra-ui/react": "^2.8.2",
+    "@chakra-ui/icons": "^2.1.1",
+    "@emotion/react": "^11.13.0",  // Mise à jour
+    "@emotion/styled": "^11.13.0", // Mise à jour
+    "framer-motion": "^11.3.19",   // Mise à jour
+    "axios": "^1.7.2",
     "react-headroom": "^3.2.1",
-    "@paypal/react-paypal-js": "^8.5.0" 
+    "@paypal/react-paypal-js": "^8.5.0"
   },
   "devDependencies": {
-    "eslint": "^7.23.0",
-    "eslint-config-next": "^14.2.5"
+    "eslint": "^8.57.0",               // Mise à jour
+    "eslint-config-next": "^14.2.5",  // Mise à jour
+    "jest": "^29.5.0",                 // Ajout de Jest
+    "@testing-library/react": "^13.4.0", // Ajout de Testing Library
+    "@testing-library/jest-dom": "^6.1.6" // Ajout de Jest DOM
   },
   "repository": {
     "type": "git",
@@ -44,4 +48,3 @@
   },
   "homepage": "https://github.com/Tyoms-3/ecommerce-site/tree/main/my-nextjs-app"
 }
-
