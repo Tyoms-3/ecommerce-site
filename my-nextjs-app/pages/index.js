@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
-import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button } from '@chakra-ui/react';
+import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button, Alert, AlertIcon } from '@chakra-ui/react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import Head from 'next/head';
 
 const initialOptions = {
-  clientId: "EBZ-akuTSAgkGBVScJLZH6wQhKqCF4bx9eJFsDu9nYv1i50hdj-Q9z4eMUZPsXvu7EU4JtAVmnxLiLup",
+  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   currency: "EUR",
 };
 
@@ -17,23 +17,26 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [color, setColor] = useState('');
   const [embroidery, setEmbroidery] = useState('');
-  const [price, setPrice] = useState(20); // Set default price based on the product
+  const [price, setPrice] = useState(20); // Prix de base par défaut
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (id) {
-      // Fetch product data
       axios.get(`/api/products/${id}`)
         .then(response => {
           setProduct(response.data);
-          setPrice(response.data.price); // Set the default price from the product data
+          setPrice(response.data.price); // Prix de base depuis les données du produit
         })
-        .catch(error => console.error('Error fetching product data:', error));
+        .catch(error => {
+          console.error('Erreur lors de la récupération des données du produit:', error);
+          setError('Erreur lors de la récupération des données du produit. Veuillez réessayer.');
+        });
     }
   }, [id]);
 
   useEffect(() => {
     const updatePrice = () => {
-      let newPrice = product ? product.price : 20; // Reset to default price based on the product
+      let newPrice = product ? product.price : 20; // Réinitialiser au prix par défaut
       switch (embroidery) {
         case 'doubleBroderieGrandePetite':
           newPrice += 3.5;
@@ -43,6 +46,9 @@ const ProductPage = () => {
           break;
         case 'doubleBroderiePetite':
           newPrice += 2;
+          break;
+        case 'doubleBroderieGrande':
+          newPrice += 6.99;
           break;
         default:
           break;
@@ -116,6 +122,13 @@ const ProductPage = () => {
             <Textarea placeholder="Préciser la position souhaitée de(s) broderie(s)" />
           </Box>
 
+          {error && (
+            <Alert status="error" mb={4}>
+              <AlertIcon />
+              {error}
+            </Alert>
+          )}
+
           <PayPalScriptProvider options={initialOptions}>
             <PayPalButtons
               createOrder={(data, actions) => {
@@ -125,14 +138,19 @@ const ProductPage = () => {
                       amount: {
                         value: price.toFixed(2), // Montant du produit
                       },
-                      description: `Achat de ${product.name} chez One TMD`, // Description incluant le nom de la boutique
+                      description: `Achat de ${product.name} chez One TMD`,
                     },
                   ],
                 });
               }}
               onApprove={async (data, actions) => {
-                const details = await actions.order.capture();
-                alert('Transaction completed by ' + details.payer.name.given_name);
+                try {
+                  const details = await actions.order.capture();
+                  alert('Transaction completed by ' + details.payer.name.given_name);
+                } catch (error) {
+                  console.error('Erreur lors de la capture de la transaction:', error);
+                  alert('Erreur lors de la capture de la transaction. Veuillez réessayer.');
+                }
               }}
             />
           </PayPalScriptProvider>
