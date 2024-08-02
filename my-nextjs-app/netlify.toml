@@ -1,10 +1,16 @@
 [build]
   command = "npm run build"
   publish = ".next"
+  functions = "netlify/functions" # Ajoutez cette ligne pour spécifier l'emplacement des fonctions Netlify
 
 [[redirects]]
   from = "/favicon.ico"
   to = "/favicon.ico"
+  status = 200
+
+[[redirects]]
+  from = "/api/cart"
+  to = "/.netlify/functions/cart"
   status = 200
 
 [[plugins]]
