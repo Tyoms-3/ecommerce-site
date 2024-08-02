@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
-import { Box, Text, Stack, Button, Textarea } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 const initialOptions = {
@@ -11,17 +11,30 @@ const initialOptions = {
 };
 
 const CheckoutPage = () => {
-  const [cart, setCart] = useState([]); // Assurez-vous que 'cart' est défini
+  const [cart, setCart] = useState([]); // État pour le panier
+  const [loading, setLoading] = useState(true); // État pour le chargement
+  const [error, setError] = useState(null); // État pour les erreurs
   const router = useRouter();
   
   useEffect(() => {
-    // Exemple pour récupérer les données du panier
-    axios.get('/api/cart')
-      .then(response => setCart(response.data))
-      .catch(error => console.error('Erreur lors de la récupération du panier:', error));
+    // Fonction pour récupérer les données du panier
+    const fetchCartData = async () => {
+      try {
+        const response = await axios.get('/api/cart');
+        setCart(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération du panier:', error);
+        setError('Erreur lors de la récupération du panier');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartData();
   }, []);
 
-  if (!cart.length) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <Box p={4}>
