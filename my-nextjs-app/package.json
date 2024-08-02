@@ -1,6 +1,6 @@
 {
   "name": "OneTMD",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
   "private": true,
   "scripts": {
@@ -29,7 +29,8 @@
     "jest": "^29.5.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/jest-dom": "^6.1.6",
-    "babel-jest": "^29.5.0"
+    "babel-jest": "^29.5.0",
+    "identity-obj-proxy": "^3.0.0" // Ajouté pour gérer les imports de styles
   },
   "repository": {
     "type": "git",
