@@ -1,5 +1,6 @@
 // lib/pricing.js
 
+// Calcule le prix en fonction du type de bordure
 export const calculateCustomizationPrice = (borderType) => {
   switch (borderType) {
     case '2 small':
@@ -11,11 +12,12 @@ export const calculateCustomizationPrice = (borderType) => {
     case '3 mixed':
       return 9.99;
     default:
-      return 0;
+      return 0; // Retourne 0 si le type de bordure n'est pas reconnu
   }
 };
 
+// Calcule le prix final en ajoutant le prix de base et le prix de personnalisation
 export const calculateFinalPrice = (basePrice, customizations) => {
   const customizationPrice = calculateCustomizationPrice(customizations.border);
-  return (basePrice + customizationPrice).toFixed(2);
+  return parseFloat((basePrice + customizationPrice).toFixed(2)); // Convertit en nombre flottant pour éviter les problèmes de précision
 };
