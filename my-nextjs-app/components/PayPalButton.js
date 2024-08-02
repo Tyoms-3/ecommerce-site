@@ -8,7 +8,11 @@ const initialOptions = {
   currency: "EUR",
 };
 
-const PaypalButton = () => {
+const PaypalButton = ({ cart }) => {
+  if (!cart || cart.length === 0) {
+    return <div>Le panier est vide.</div>; // Affiche un message si le panier est vide
+  }
+
   const totalAmount = cart.reduce((total, item) => total + parseFloat(item.finalPrice), 0).toFixed(2);
 
   return (
@@ -36,8 +40,16 @@ const PaypalButton = () => {
           });
         }}
         onApprove={async (data, actions) => {
-          const details = await actions.order.capture();
-          console.log("Transaction completed by " + details.payer.name.given_name);
+          try {
+            const details = await actions.order.capture();
+            console.log("Transaction completed by " + details.payer.name.given_name);
+            // Vous pouvez également ajouter une redirection ou une confirmation ici
+          } catch (error) {
+            console.error("Erreur lors de la capture de la commande:", error);
+          }
+        }}
+        onError={(error) => {
+          console.error("Erreur PayPal:", error);
         }}
       />
     </PayPalScriptProvider>
