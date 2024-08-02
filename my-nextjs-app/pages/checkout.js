@@ -69,4 +69,23 @@ const CheckoutPage = () => {
   );
 };
 
+export async function getServerSideProps() {
+  try {
+    const response = await axios.get('https://your-netlify-site.netlify.app/api/cart');
+    return {
+      props: {
+        cart: response.data,
+        error: null,
+      },
+    };
+  } catch (error) {
+    console.error('Erreur lors de la récupération du panier:', error);
+    return {
+      props: {
+        cart: [],
+        error: 'Erreur lors de la récupération du panier',
+      },
+    };
+  }
+}
 export default CheckoutPage;
