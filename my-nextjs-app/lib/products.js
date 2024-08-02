@@ -7,10 +7,12 @@ const products = [
   { id: 3, name: 'Produit 3', description: 'Description du produit 3', price: 30, imageUrl: '/image3.jpg' },
 ];
 
+// Retourne un produit basé sur son ID
 export const getProductById = (id) => {
-  return products.find((product) => product.id === parseInt(id, 10));
+  return products.find((product) => product.id === parseInt(id, 10)); // Assure que l'ID est un nombre entier
 };
 
+// Retourne tous les produits
 export const getAllProducts = () => {
   return products;
 };
