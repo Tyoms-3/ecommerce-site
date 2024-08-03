@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { Box, Text } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 
 const initialOptions = {
   clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -14,8 +13,7 @@ const CheckoutPage = () => {
   const [cart, setCart] = useState([]); // État pour le panier
   const [loading, setLoading] = useState(true); // État pour le chargement
   const [error, setError] = useState(null); // État pour les erreurs
-  const router = useRouter();
-  
+
   useEffect(() => {
     // Fonction pour récupérer les données du panier
     const fetchCartData = async () => {
@@ -69,23 +67,4 @@ const CheckoutPage = () => {
   );
 };
 
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get('https://your-netlify-site.netlify.app/api/cart');
-    return {
-      props: {
-        cart: response.data,
-        error: null,
-      },
-    };
-  } catch (error) {
-    console.error('Erreur lors de la récupération du panier:', error);
-    return {
-      props: {
-        cart: [],
-        error: 'Erreur lors de la récupération du panier',
-      },
-    };
-  }
-}
 export default CheckoutPage;
