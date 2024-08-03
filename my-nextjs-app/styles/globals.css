@@ -8,6 +8,8 @@ body, html {
   -webkit-text-size-adjust: 100%; /* Pour WebKit et Blink */
   -ms-text-size-adjust: 100%; /* Pour Internet Explorer */
   text-size-adjust: 100%; /* Spécification standard */
+  font-family: Arial, sans-serif; /* Font pour toute l'application */
+  background-color: #f4f4f4; /* Couleur de fond globale */
 }
 
 #__next {
@@ -18,126 +20,20 @@ body, html {
   padding: 0;
 }
 
-/* Nouvelle section */
-.newSection {
-  background-color: #B5A1A0;
-  padding: 50px 20px;
-  display: flex;
-  flex-wrap: wrap; /* Assurez-vous que les cartes s'enroulent correctement */
-  gap: 20px; /* Espacement entre les cartes */
-  justify-content: center; /* Centrer les cartes horizontalement */
-}
-
-/* Styles pour les cartes */
-.card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  text-align: center;
-  width: calc(33.333% - 20px); /* Ajuster la largeur pour trois cartes avec un espacement de 20px */
-  box-sizing: border-box;
-  transition: transform 0.3s ease;
-}
-
-/* Effet de survol pour les cartes */
-.card:hover {
-  transform: scale(1.05);
-}
-
-/* Styles pour les images dans les cartes */
-.card img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Styles pour les titres des cartes */
-.card h3 {
-  margin: 10px 0;
-  font-size: 1.5em;
-}
-
-/* Styles pour le texte dans les cartes */
-.card p {
-  margin: 10px 0;
-  font-size: 1em;
-  color: #333;
-}
-
-/* Styles pour le prix dans les cartes */
-.card .price {
-  margin-top: 10px;
-  font-size: 1.2em;
-  color: #000;
-  font-weight: bold;
-}
-
-/* Page produit */
-.productPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #000;
-  color: #fff;
+/* Section spécifique pour l'image de fond */
+.sectionPrincipale {
+  position: relative;
+  width: 100%;
   height: 100vh;
+  overflow: hidden;
+  background-image: url('/image3-fond.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
 }
 
-/* Styles pour les images de produit */
-.productImage {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Styles pour les détails du produit */
-.productDetails {
-  background-color: #B5A1A0;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 600px;
-}
-
-/* Styles pour le prix dans les détails du produit */
-.productDetails .price {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-/* Styles pour les options de couleur et de broderie */
-.productDetails .colorOptions,
-.productDetails .embroideryOptions {
-  margin-bottom: 20px;
-}
-
-/* Styles pour les options de couleur et de broderie individuelles */
-.productDetails .colorOptions div,
-.productDetails .embroideryOptions div {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-/* Styles pour les labels des options de broderie */
-.productDetails .embroideryOptions label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-/* Styles pour les zones de texte */
-.productDetails textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  resize: vertical;
-}
-
-/* Styles pour le bouton de retour */
+/* Styles pour les boutons */
 .buttonBack {
   margin-top: 20px;
   padding: 10px 20px;
@@ -149,67 +45,11 @@ body, html {
   font-size: 1em;
 }
 
-/* Media Queries */
-
-/* Petits écrans (smartphones en mode portrait) */
-@media (max-width: 600px) {
-  .sectionPrincipale {
-    height: 150vh;
-  }
-
-  .titrePrincipal {
-    font-size: 6vw;
-  }
-
-  .slogan {
-    font-size: 3vw;
-  }
-
-  .newSection {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 80%;
-  }
-}
-
-/* Écrans moyens (tablettes en mode portrait et petits ordinateurs portables) */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .sectionPrincipale {
-    height: 150vh;
-  }
-
-  .titrePrincipal {
-    font-size: 5vw;
-  }
-
-  .slogan {
-    font-size: 2.5vw;
-  }
-
-  .newSection {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 45%;
-  }
-}
-
-/* Grands écrans (grands ordinateurs de bureau) */
-@media (min-width: 1025px) {
-  .sectionPrincipale {
-    height: 150vh;
-  }
-
-  .titrePrincipal {
-    font-size: 4vw;
-  }
-
-  .slogan {
-    font-size: 2vw;
-  }
+/* Styles pour les alertes */
+.alertError {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
 }
