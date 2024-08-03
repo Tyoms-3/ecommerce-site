@@ -1,18 +1,37 @@
 // lib/products.js
 
-// Simule des données de produits
-const products = [
-  { id: 1, name: 'Produit 1', description: 'Description du produit 1', price: 10, imageUrl: '/image1.jpg' },
-  { id: 2, name: 'Produit 2', description: 'Description du produit 2', price: 20, imageUrl: '/image2.jpg' },
-  { id: 3, name: 'Produit 3', description: 'Description du produit 3', price: 30, imageUrl: '/image3.jpg' },
-];
-
-// Retourne un produit basé sur son ID
-export const getProductById = (id) => {
-  return products.find((product) => product.id === parseInt(id, 10)); // Assure que l'ID est un nombre entier
+// Exemple de données simulées
+const products = {
+  1: {
+    id: 1,
+    name: 'Sweat Personnalisé',
+    image: '/image3-fond.jpg',
+    colors: ['Rouge', 'Bleu', 'Vert'],
+    embroideryOptions: [
+      { type: 'double_broderie_grande_et_petite', label: 'Double broderie grande et petite (+€3.5)' },
+      { type: 'double_broderie_grande', label: 'Double broderie grande (+€5.0)' },
+      { type: 'double_broderie_petite', label: 'Double broderie petite (+€2.0)' },
+    ],
+    basePrice: 20.00
+  },
+  2: {
+    id: 2,
+    name: 'Pull Personnalisé',
+    image: '/image2.jpg',
+    colors: ['Rouge', 'Bleu', 'Vert'],
+    embroideryOptions: [
+      { type: 'double_broderie_grande_et_petite', label: 'Double broderie grande et petite (+€3.5)' },
+      { type: 'double_broderie_grande', label: 'Double broderie grande (+€5.0)' },
+      { type: 'double_broderie_petite', label: 'Double broderie petite (+€2.0)' },
+    ],
+    basePrice: 25.00
+  }
 };
 
-// Retourne tous les produits
-export const getAllProducts = () => {
-  return products;
-};
+export function getProductById(id) {
+  return products[id] || null;
+}
+
+export function getAllProducts() {
+  return Object.values(products);
+}
