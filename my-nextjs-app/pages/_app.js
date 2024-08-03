@@ -3,6 +3,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import Head from 'next/head';
 import { extendTheme } from '@chakra-ui/react';
+import '../styles/global.css';  // Import des styles globaux
+import '../public/styles.css';  // Import des styles spécifiques
 
 // Configuration du thème Chakra UI
 const theme = extendTheme({
