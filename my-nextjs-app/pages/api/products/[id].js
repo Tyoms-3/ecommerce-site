@@ -1,3 +1,4 @@
+//pages/api/product/[id].js
 import { getProductById } from '../../../lib/products';
 
 export default function handler(req, res) {
