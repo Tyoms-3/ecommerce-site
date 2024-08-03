@@ -1,57 +1,70 @@
-/* Styles globaux */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-}
-
-main {
-  padding: 20px; /* Ce padding s'applique aux autres éléments à l'intérieur du <main> */
-}
-
-/* Section spécifique pour l'image de fond */
-.sectionPrincipale {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* Utilisation de 100vh pour couvrir toute la hauteur de la vue */
-  overflow: hidden;
-  background-image: url('/image3-fond.jpg'); /* Assurez-vous que le chemin est correct */
-  background-size: cover; /* Ajuste la taille de l'image pour couvrir l'élément */
-  background-position: center; /* Centre l'image */
-  background-repeat: no-repeat; /* Évite la répétition de l'image */
-  padding: 0; /* Retire le padding pour cette section spécifique */
-}
-
-/* Autres éléments */
-#products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.product {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-
-/* Nouvelle section */
-.newSection {
-  background-color: #B5A1A0; /* Couleur de fond */
-  padding: 50px 20px; /* Padding pour la section */
+/* Page produit */
+.productPage {
   display: flex;
-  justify-content: space-around; /* Centrer les cadres horizontalement */
-  flex-wrap: wrap; /* Permettre aux cadres de se déplacer à la ligne suivante si nécessaire */
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  height: 100vh;
+}
+
+.productImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.productDetails {
+  background-color: #B5A1A0;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.productDetails .price {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.productDetails .colorOptions,
+.productDetails .embroideryOptions {
+  margin-bottom: 20px;
+}
+
+.productDetails .colorOptions div,
+.productDetails .embroideryOptions div {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.productDetails .embroideryOptions label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.productDetails textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+/* Cartes et sections */
+.newSection {
+  background-color: #B5A1A0;
+  padding: 50px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .card {
@@ -59,13 +72,13 @@ main {
   border: 1px solid #ddd;
   padding: 20px;
   text-align: center;
-  width: 30%;
-  margin: 10px; /* Espacement entre les cartes */
-  transition: transform 0.3s ease; /* Animation pour l'agrandissement */
+  width: calc(33.333% - 20px);
+  margin: 10px;
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
-  transform: scale(1.05); /* Agrandissement au survol */
+  transform: scale(1.05);
 }
 
 .card img {
@@ -89,4 +102,65 @@ main {
   font-size: 1.2em;
   color: #000;
   font-weight: bold;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .sectionPrincipale {
+    height: 150vh;
+  }
+
+  .titrePrincipal {
+    font-size: 6vw;
+  }
+
+  .slogan {
+    font-size: 3vw;
+  }
+
+  .newSection {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .sectionPrincipale {
+    height: 150vh;
+  }
+
+  .titrePrincipal {
+    font-size: 5vw;
+  }
+
+  .slogan {
+    font-size: 2.5vw;
+  }
+
+  .newSection {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 45%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .sectionPrincipale {
+    height: 150vh;
+  }
+
+  .titrePrincipal {
+    font-size: 4vw;
+  }
+
+  .slogan {
+    font-size: 2vw;
+  }
 }
