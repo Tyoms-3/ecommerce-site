@@ -24,8 +24,12 @@ const ProductPage = () => {
     if (id) {
       axios.get(`/api/products/${id}`)
         .then(response => {
-          setProduct(response.data);
-          setPrice(response.data.price); // Prix de base depuis les données du produit
+          if (response.data) {
+            setProduct(response.data);
+            setPrice(response.data.price); // Prix de base depuis les données du produit
+          } else {
+            setError('Produit non trouvé');
+          }
         })
         .catch(error => {
           console.error('Erreur lors de la récupération des données du produit:', error);
@@ -42,13 +46,16 @@ const ProductPage = () => {
           newPrice += 3.5;
           break;
         case 'doubleBroderieGrande':
-          newPrice += 5;
+          newPrice += 6.99;
           break;
         case 'doubleBroderiePetite':
           newPrice += 2;
           break;
-        case 'doubleBroderieGrande':
-          newPrice += 6.99;
+        case 'grandeBroderie':
+          newPrice += 5;
+          break;
+        case 'petiteBroderie':
+          newPrice += 2.5; // Ajout d'une valeur pour petite broderie si nécessaire
           break;
         default:
           break;
@@ -62,7 +69,19 @@ const ProductPage = () => {
     setEmbroidery(value);
   };
 
-  if (!product) return <div>Loading...</div>;
+  if (!product) {
+    return (
+      <Box textAlign="center" p={4}>
+        <Text fontSize="xl">Chargement en cours...</Text>
+        {error && (
+          <Alert status="error" mt={4}>
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
+      </Box>
+    );
+  }
 
   return (
     <Box>
@@ -146,7 +165,7 @@ const ProductPage = () => {
               onApprove={async (data, actions) => {
                 try {
                   const details = await actions.order.capture();
-                  alert('Transaction completed by ' + details.payer.name.given_name);
+                  alert('Transaction complétée par ' + details.payer.name.given_name);
                 } catch (error) {
                   console.error('Erreur lors de la capture de la transaction:', error);
                   alert('Erreur lors de la capture de la transaction. Veuillez réessayer.');
