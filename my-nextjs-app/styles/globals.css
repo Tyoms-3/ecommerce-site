@@ -5,8 +5,6 @@ body, html {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  -webkit-text-size-adjust: 100%; /* Pour WebKit et Blink */
-  -ms-text-size-adjust: 100%; /* Pour Internet Explorer */
   text-size-adjust: 100%; /* Spécification standard */
   font-family: Arial, sans-serif; /* Font pour toute l'application */
   background-color: #f4f4f4; /* Couleur de fond globale */
