@@ -1,7 +1,8 @@
 // components/PaypalButton.js
 import React from 'react';
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
+// Assurez-vous que le clientId est correctement défini dans les variables d'environnement
 const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
 
 const initialOptions = {
@@ -63,13 +64,11 @@ const PaypalButton = ({ cart }) => {
   };
 
   return (
-    <PayPalScriptProvider options={initialOptions}>
-      <PayPalButtons
-        createOrder={createOrder}
-        onApprove={onApprove}
-        onError={onError}
-      />
-    </PayPalScriptProvider>
+    <PayPalButtons
+      createOrder={createOrder}
+      onApprove={onApprove}
+      onError={onError}
+    />
   );
 };
 
