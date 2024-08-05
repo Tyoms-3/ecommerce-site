@@ -1,4 +1,5 @@
 // pages/product/[id].js
+// pages/product/[id].js
 import { useRouter } from 'next/router';
 import { Box, Text, Stack, Radio, RadioGroup, Textarea, Button, Alert, AlertIcon } from '@chakra-ui/react';
 import axios from 'axios';
@@ -7,7 +8,7 @@ import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import Head from 'next/head';
 
 const initialOptions = {
-  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+  "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   currency: "EUR",
 };
 
@@ -61,6 +62,36 @@ const ProductPage = () => {
 
   const handleEmbroideryChange = (value) => {
     setEmbroidery(value);
+  };
+
+  const createOrder = (data, actions) => {
+    console.log('Creating order with amount:', price.toFixed(2)); // Debugging
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: price.toFixed(2), // Montant du produit
+          },
+          description: `Achat de ${product.name} chez One TMD`,
+        },
+      ],
+    });
+  };
+
+  const onApprove = async (data, actions) => {
+    try {
+      const details = await actions.order.capture();
+      console.log('Transaction details:', details); // Debugging
+      alert('Transaction completed by ' + details.payer.name.given_name);
+    } catch (error) {
+      console.error('Erreur lors de la capture de la transaction:', error);
+      alert('Erreur lors de la capture de la transaction. Veuillez réessayer.');
+    }
+  };
+
+  const onError = (error) => {
+    console.error('Erreur PayPal:', error);
+    alert('Erreur lors du paiement. Veuillez réessayer.');
   };
 
   if (!product) return <div>Loading...</div>;
@@ -132,27 +163,9 @@ const ProductPage = () => {
 
           <PayPalScriptProvider options={initialOptions}>
             <PayPalButtons
-              createOrder={(data, actions) => {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: price.toFixed(2), // Montant du produit
-                      },
-                      description: `Achat de ${product.name} chez One TMD`,
-                    },
-                  ],
-                });
-              }}
-              onApprove={async (data, actions) => {
-                try {
-                  const details = await actions.order.capture();
-                  alert('Transaction completed by ' + details.payer.name.given_name);
-                } catch (error) {
-                  console.error('Erreur lors de la capture de la transaction:', error);
-                  alert('Erreur lors de la capture de la transaction. Veuillez réessayer.');
-                }
-              }}
+              createOrder={createOrder}
+              onApprove={onApprove}
+              onError={onError}
             />
           </PayPalScriptProvider>
         </Box>
