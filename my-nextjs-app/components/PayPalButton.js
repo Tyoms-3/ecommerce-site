@@ -16,10 +16,18 @@ const PaypalButton = ({ cart }) => {
 
   const totalAmount = cart.reduce((total, item) => total + parseFloat(item.finalPrice), 0).toFixed(2);
 
+  // Logs pour déboguer le contenu du panier et le montant total
+  console.log("Contenu du panier:", cart);
+  console.log("Montant total:", totalAmount);
+
   return (
     <PayPalScriptProvider options={initialOptions}>
       <PayPalButtons
         createOrder={(data, actions) => {
+          // Log pour vérifier les données passées à createOrder
+          console.log("createOrder data:", data);
+          console.log("createOrder actions:", actions);
+
           return actions.order.create({
             purchase_units: [
               {
@@ -42,6 +50,10 @@ const PaypalButton = ({ cart }) => {
         }}
         onApprove={async (data, actions) => {
           try {
+            // Log pour vérifier les données de la transaction approuvée
+            console.log("onApprove data:", data);
+            console.log("onApprove actions:", actions);
+
             const details = await actions.order.capture();
             console.log("Transaction completed by " + details.payer.name.given_name);
             // Vous pouvez également ajouter une redirection ou une confirmation ici
@@ -50,6 +62,7 @@ const PaypalButton = ({ cart }) => {
           }
         }}
         onError={(error) => {
+          // Log pour vérifier les erreurs PayPal
           console.error("Erreur PayPal:", error);
         }}
       />
