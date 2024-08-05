@@ -1,4 +1,0 @@
-{
-  "welcome": "Bienvenue",
-  "product": "Produit"
-}
