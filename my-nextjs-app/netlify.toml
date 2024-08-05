@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
-  publish = ".next"
-  functions = "netlify/functions" # Ajoutez cette ligne pour spécifier l'emplacement des fonctions Netlify
+  publish = ".next" # Assurez-vous que c'est bien le répertoire de publication de votre build Next.js
+  functions = "netlify/functions" # Chemin vers le répertoire contenant vos fonctions Netlify
 
 [[redirects]]
   from = "/favicon.ico"
@@ -10,7 +10,22 @@
 
 [[redirects]]
   from = "/api/cart"
-  to = "/.netlify/functions/cart"
+  to = "/.netlify/functions/cart" # Assurez-vous que vos fonctions sont à cet endroit
+  status = 200
+
+[[redirects]]
+  from = "/api/products"
+  to = "/.netlify/functions/products/index" # Assurez-vous que vos fonctions sont à cet endroit
+  status = 200
+
+[[redirects]]
+  from = "/api/products/:id"
+  to = "/.netlify/functions/products/[id]" # Utilisez le nom du fichier dynamique avec crochets
+  status = 200
+
+[[redirects]]
+  from = "/api/orders"
+  to = "/.netlify/functions/orders" # Assurez-vous que vos fonctions sont à cet endroit
   status = 200
 
 [[plugins]]
