@@ -19,8 +19,9 @@ const theme = extendTheme({
   },
 });
 
+// Options pour PayPal
 const initialOptions = {
-  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+  "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   currency: "EUR",
 };
 
