@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       }
 
       const client = await clientPromise;
-      const db = client.db('yourDatabaseName'); // Remplacez par le nom de votre base de données
+      const db = client.db('Project 0'); // Remplacez par le nom de votre base de données
       const collection = db.collection('orders');
 
       // Enregistrez la commande dans la base de données
