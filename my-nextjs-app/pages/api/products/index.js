@@ -1,22 +1,23 @@
 // pages/api/products/index.js
-import clientPromise from '../../lib/mongodb';
+import clientPromise from '../../../lib/mongodb';
 
-export default async function handler(req, res) {
-  if (req.method === 'GET') {
-    try {
-      const client = await clientPromise;
-      const db = client.db('Project 0'); // Remplacez 'myDatabase' par le nom réel de votre base de données
-      const collection = db.collection('products');
+export default async (req, res) => {
+  const client = await clientPromise;
+  const db = client.db('ecommerce');
 
-      const products = await collection.find({}).toArray();
-
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error fetching products:', error); // Log the error if something goes wrong
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  } else {
-    res.setHeader('Allow', ['GET']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+  switch (req.method) {
+    case 'POST':
+      let bodyObject = JSON.parse(req.body);
+      let newProduct = await db.collection('products').insertOne(bodyObject);
+      res.json(newProduct.ops[0]);
+      break;
+    case 'GET':
+      const products = await db.collection('products').find({}).toArray();
+      res.json({ status: 200, data: products });
+      break;
+    default:
+      res.setHeader('Allow', ['GET', 'POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
+      break;
   }
-}
+};
