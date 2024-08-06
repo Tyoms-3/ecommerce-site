@@ -9,22 +9,22 @@
 
 [[redirects]]
   from = "/api/cart"
-  to = "/api/cart"
-  status = 200
-
-[[redirects]]
-  from = "/api/products"
-  to = "/api/products"
+  to = "/.netlify/functions/cart"
   status = 200
 
 [[redirects]]
   from = "/api/products/:id"
-  to = "/api/products/[id]"
+  to = "/.netlify/functions/product-id"
+  status = 200
+
+[[redirects]]
+  from = "/api/products"
+  to = "/.netlify/functions/products"
   status = 200
 
 [[redirects]]
   from = "/api/orders"
-  to = "/api/orders"
+  to = "/.netlify/functions/orders"
   status = 200
 
 [[plugins]]
