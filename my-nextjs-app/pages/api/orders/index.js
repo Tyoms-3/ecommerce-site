@@ -1,6 +1,6 @@
 // pages/api/orders/index.js
 
-import clientPromise from '../lib/mongodb.js';
+import clientPromise from 'my-nextjs-app/lib/mongodb.js';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
