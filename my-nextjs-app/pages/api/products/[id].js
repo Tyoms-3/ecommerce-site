@@ -1,6 +1,6 @@
 // pages/api/products/[id].js
 
-import clientPromise from '../../lib/mongodb'; // Assurez-vous que ce fichier est correctement configuré
+import clientPromise from '../lib/mongodb.js'; // Assurez-vous que ce fichier est correctement configuré
 import { ObjectId } from 'mongodb'; // Importez ObjectId depuis 'mongodb' A VERIFIER 
 
 export default async function handler(req, res) {
