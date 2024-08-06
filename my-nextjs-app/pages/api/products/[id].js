@@ -1,26 +1,33 @@
-// pages/api/product/[id].js
-import { getProductById } from '../../../lib/products';
+// pages/api/products/[id].js
 
-export default function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
+import clientPromise from '../../../lib/mongodb';
 
-  const { id } = req.query;
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    try {
+      const { id } = req.query;
 
-  if (!id || typeof id !== 'string') {
-    return res.status(400).json({ message: 'Invalid ID' });
-  }
+      if (!id || typeof id !== 'string') {
+        return res.status(400).json({ message: 'Invalid ID' });
+      }
 
-  console.log('Requested product ID:', id); // Affiche l'ID demandé
+      const client = await clientPromise;
+      const db = client.db('yourDatabaseName'); // Remplacez par le nom de votre base de données
+      const collection = db.collection('products');
 
-  const product = getProductById(id);
+      const product = await collection.findOne({ _id: new MongoClient.ObjectId(id) });
 
-  if (product) {
-    console.log('Product found:', product); // Affiche le produit trouvé
-    res.status(200).json(product);
+      if (product) {
+        res.status(200).json(product);
+      } else {
+        res.status(404).json({ message: 'Product not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   } else {
-    console.log('Product not found'); // Affiche si le produit n'est pas trouvé
-    res.status(404).json({ message: 'Product not found' });
+    res.setHeader('Allow', ['GET']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
