@@ -1,10 +1,10 @@
 // pages/api/cart.js
-import clientPromise from '../../lib/mongodb.js';
+import clientPromise from '../../lib/mongodb.js'; // Correction du chemin
 
 export default async function handler(req, res) {
   try {
     const client = await clientPromise;
-    const db = client.db('Project 0'); // Remplacez par le nom de votre base de données
+    const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
     const collection = db.collection('cart');
 
     if (req.method === 'GET') {
