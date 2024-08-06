@@ -1,22 +1,26 @@
 // pages/api/orders/index.js
 
+import clientPromise from '../../../lib/mongodb';
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // Vérifier que req.body contient les données nécessaires
       const { customer, items, totalAmount } = req.body;
 
       if (!customer || !items || !totalAmount) {
         return res.status(400).json({ message: 'Bad Request: Missing required fields' });
       }
 
-      // Vous pouvez ajouter une logique pour enregistrer cette commande dans une base de données
-      console.log('Order received:', req.body); // Debugging: Check the order data
+      const client = await clientPromise;
+      const db = client.db('yourDatabaseName'); // Remplacez par le nom de votre base de données
+      const collection = db.collection('orders');
 
-      // Réponse succès
-      res.status(201).json({ message: 'Order created successfully', order: req.body });
+      // Enregistrez la commande dans la base de données
+      const result = await collection.insertOne({ customer, items, totalAmount });
+
+      res.status(201).json({ message: 'Order created successfully', order: result.ops[0] });
     } catch (error) {
-      console.error('Error creating order:', error); // Log the error if something goes wrong
+      console.error('Error creating order:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
   } else {
