@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
   publish = ".next"
-  functions = "functions" # Assurez-vous que le répertoire des fonctions est correctement configuré
+  functions = "functions"
 
 [[redirects]]
   from = "/favicon.ico"
