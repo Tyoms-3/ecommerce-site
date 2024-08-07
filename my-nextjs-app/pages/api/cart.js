@@ -1,5 +1,5 @@
 // pages/api/cart.js
-import clientPromise from '../../lib/mongodb.js'; // Correction du chemin
+import clientPromise from '../../lib/mongodb'; // Assurez-vous que le chemin est correct
 
 export default async function handler(req, res) {
   try {
