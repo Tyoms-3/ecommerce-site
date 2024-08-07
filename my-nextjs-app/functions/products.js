@@ -1,20 +1,17 @@
-const { MongoClient } = require('mongodb');
-
-const uri = process.env.MONGODB_URI; // Assurez-vous que cette variable est définie dans vos environnements Netlify
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+import clientPromise from '../lib/mongodb.js';
 
 exports.handler = async (event) => {
-  await client.connect();
-  const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
+  const client = await clientPromise;
+  const db = client.db('ecommerce');
   const collection = db.collection('products');
 
   if (event.httpMethod === 'POST') {
     try {
       const bodyObject = JSON.parse(event.body);
-      const newProduct = await collection.insertOne(bodyObject);
+      const result = await collection.insertOne(bodyObject);
       return {
         statusCode: 201,
-        body: JSON.stringify(newProduct.ops[0]),
+        body: JSON.stringify(result.ops[0]),
       };
     } catch (error) {
       console.error('Error creating product:', error);
