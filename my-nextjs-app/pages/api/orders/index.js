@@ -1,6 +1,5 @@
 // pages/api/orders/index.js
-
-import clientPromise from 'my-nextjs-app/lib/mongodb.js';
+import clientPromise from '../../lib/mongodb'; // Assurez-vous que le chemin est correct
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -12,7 +11,7 @@ export default async function handler(req, res) {
       }
 
       const client = await clientPromise;
-      const db = client.db('Project 0'); // Remplacez par le nom de votre base de données
+      const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
       const collection = db.collection('orders');
 
       // Enregistrez la commande dans la base de données
