@@ -1,5 +1,5 @@
 // pages/api/products/index.js
-import clientPromise from '../../lib/mongodb.js';
+import clientPromise from '../../lib/mongodb'; // Assurez-vous que le chemin est correct
 
 export default async function handler(req, res) {
   const client = await clientPromise;
