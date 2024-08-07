@@ -1,14 +1,11 @@
-const { MongoClient, ObjectId } = require('mongodb');
-
-const uri = process.env.MONGODB_URI; // Assurez-vous que cette variable est définie dans vos environnements Netlify
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+import clientPromise from '../lib/mongodb.js';
+import { ObjectId } from 'mongodb';
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'GET') {
     try {
       const { id } = event.queryStringParameters;
 
-      // Validation de l'ID
       if (!id || typeof id !== 'string') {
         return {
           statusCode: 400,
@@ -16,11 +13,10 @@ exports.handler = async (event) => {
         };
       }
 
-      await client.connect();
-      const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
+      const client = await clientPromise;
+      const db = client.db('ecommerce');
       const collection = db.collection('products');
 
-      // Requête pour trouver le produit par ID
       const product = await collection.findOne({ _id: new ObjectId(id) });
 
       if (product) {
@@ -40,8 +36,6 @@ exports.handler = async (event) => {
         statusCode: 500,
         body: JSON.stringify({ message: 'Internal Server Error' }),
       };
-    } finally {
-      await client.close();
     }
   } else {
     return {
