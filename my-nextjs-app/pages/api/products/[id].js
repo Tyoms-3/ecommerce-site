@@ -1,7 +1,6 @@
 // pages/api/products/[id].js
-
-import clientPromise from '../lib/mongodb.js'; // Assurez-vous que ce fichier est correctement configuré
-import { ObjectId } from 'mongodb'; // Importez ObjectId depuis 'mongodb' A VERIFIER 
+import clientPromise from '../../lib/mongodb'; // Assurez-vous que le chemin est correct
+import { ObjectId } from 'mongodb'; // Importez ObjectId depuis 'mongodb'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
@@ -14,7 +13,7 @@ export default async function handler(req, res) {
       }
 
       const client = await clientPromise;
-      const db = client.db('Project 0'); // Remplacez par le nom de votre base de données
+      const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
       const collection = db.collection('products');
 
       // Requête pour trouver le produit par ID
