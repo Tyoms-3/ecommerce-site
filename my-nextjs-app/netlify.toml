@@ -4,13 +4,13 @@
   functions = "functions"
 
 [[redirects]]
-  from = "/favicon.ico"
-  to = "/favicon.ico"
+  from = "/api/cart"
+  to = "/.netlify/functions/cart"
   status = 200
 
 [[redirects]]
-  from = "/api/cart"
-  to = "/.netlify/functions/cart"
+  from = "/api/orders"
+  to = "/.netlify/functions/orders"
   status = 200
 
 [[redirects]]
@@ -21,11 +21,6 @@
 [[redirects]]
   from = "/api/products"
   to = "/.netlify/functions/products"
-  status = 200
-
-[[redirects]]
-  from = "/api/orders"
-  to = "/.netlify/functions/orders"
   status = 200
 
 [[plugins]]
