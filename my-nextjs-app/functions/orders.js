@@ -1,4 +1,8 @@
 //functions/orders.js
+const { MongoClient } = require('mongodb');
+
+const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 exports.handler = async (event, context) => {
   if (event.httpMethod === 'POST') {
     try {
@@ -11,11 +15,16 @@ exports.handler = async (event, context) => {
         };
       }
 
-      console.log('Order received:', { customer, items, totalAmount });
+      await client.connect();
+      const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
+      const collection = db.collection('orders');
+
+      // Enregistrez la commande dans la base de données
+      const result = await collection.insertOne({ customer, items, totalAmount });
 
       return {
         statusCode: 201,
-        body: JSON.stringify({ message: 'Order created successfully', order: { customer, items, totalAmount } }),
+        body: JSON.stringify({ message: 'Order created successfully', order: result.ops[0] }),
       };
     } catch (error) {
       console.error('Error creating order:', error);
@@ -23,6 +32,8 @@ exports.handler = async (event, context) => {
         statusCode: 500,
         body: JSON.stringify({ message: 'Internal Server Error' }),
       };
+    } finally {
+      await client.close();
     }
   } else {
     return {
