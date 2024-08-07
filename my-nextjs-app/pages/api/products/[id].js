@@ -1,23 +1,15 @@
 // pages/api/products/[id].js
-import clientPromise from '../../lib/mongodb'; // Assurez-vous que le chemin est correct
-import { ObjectId } from 'mongodb'; // Importez ObjectId depuis 'mongodb'
-
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const { id } = req.query;
 
-      // Validation de l'ID
       if (!id || typeof id !== 'string') {
         return res.status(400).json({ message: 'Invalid ID' });
       }
 
-      const client = await clientPromise;
-      const db = client.db('ecommerce'); // Remplacez par le nom de votre base de données
-      const collection = db.collection('products');
-
-      // Requête pour trouver le produit par ID
-      const product = await collection.findOne({ _id: new ObjectId(id) });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/.netlify/functions/product-id?id=${id}`);
+      const product = await response.json();
 
       if (product) {
         res.status(200).json(product);
