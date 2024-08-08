@@ -1,4 +1,7 @@
 // pages/api/products/[id].js
+import clientPromise from '../../../lib/mongodb'; // Assurez-vous que le chemin est correct
+import { ObjectId } from 'mongodb';
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
@@ -8,20 +11,22 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Invalid ID' });
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/.netlify/functions/product-id?id=${id}`);
-      const product = await response.json();
+      const client = await clientPromise;
+      const db = client.db('ecommerce');
+      const collection = db.collection('products');
+
+      const product = await collection.findOne({ _id: new ObjectId(id) });
 
       if (product) {
-        res.status(200).json(product);
+        return res.status(200).json(product);
       } else {
-        res.status(404).json({ message: 'Product not found' });
+        return res.status(404).json({ message: 'Product not found' });
       }
     } catch (error) {
       console.error('Error fetching product:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+      return res.status(500).json({ message: 'Internal Server Error' });
     }
   } else {
-    res.setHeader('Allow', ['GET']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
   }
 }
