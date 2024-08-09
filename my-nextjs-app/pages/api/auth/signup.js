@@ -1,39 +1,47 @@
 import dbConnect from '../../../lib/dbConnect';
 import User from '../../../lib/models/User';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   await dbConnect();
-  
-  if (req.method === 'POST') {
-    try {
-      const { name, email, password } = req.body;
 
-      // Check if the user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).json({ success: false, message: 'User already exists' });
+  if (req.method === 'POST') {
+    const { firstName, lastName, email, phoneNumber, password } = req.body;
+
+    try {
+      const userExists = await User.findOne({ email });
+
+      if (userExists) {
+        return res.status(400).json({ error: 'User already exists' });
       }
 
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Create a new user
       const user = await User.create({
-        name,
+        firstName,
+        lastName,
         email,
-        password: hashedPassword,
+        phoneNumber,
+        password,
       });
 
-      // Generate a token
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+      });
 
-      res.status(201).json({ success: true, token });
+      res.status(201).json({
+        success: true,
+        data: {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          token,
+        },
+      });
     } catch (error) {
-      res.status(400).json({ success: false, message: error.message });
+      res.status(400).json({ error: 'Error creating user' });
     }
   } else {
-    res.status(405).json({ success: false, message: 'Method not allowed' });
+    res.status(405).json({ message: 'Method not allowed' });
   }
 }
