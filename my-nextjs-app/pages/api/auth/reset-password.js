@@ -1,32 +1,33 @@
-import dbConnect from '../../../lib/dbConnect';
-import User from '../../../lib/models/User';
 import bcrypt from 'bcryptjs';
+import User from '../../../lib/models/User'; // Assurez-vous que ce modèle existe
 
 export default async function handler(req, res) {
-  await dbConnect();
-  
   if (req.method === 'POST') {
-    try {
-      const { resetToken, newPassword } = req.body;
+    const { token, newPassword } = req.body;
 
-      const user = await User.findOne({ resetToken, resetTokenExpire: { $gt: Date.now() } });
+    if (!token || !newPassword) {
+      return res.status(400).json({ message: 'Token et nouveau mot de passe requis' });
+    }
+
+    try {
+      const user = await User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } });
+
       if (!user) {
-        return res.status(400).json({ success: false, message: 'Invalid or expired reset token' });
+        return res.status(400).json({ message: 'Token invalide ou expiré' });
       }
 
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-
+      const hashedPassword = await bcrypt.hash(newPassword, 12);
       user.password = hashedPassword;
       user.resetToken = undefined;
-      user.resetTokenExpire = undefined;
+      user.resetTokenExpiration = undefined;
       await user.save();
 
-      res.status(200).json({ success: true, message: 'Password updated successfully' });
+      return res.status(200).json({ message: 'Mot de passe réinitialisé avec succès' });
     } catch (error) {
-      res.status(400).json({ success: false, message: error.message });
+      console.error('Erreur lors de la réinitialisation du mot de passe:', error);
+      return res.status(500).json({ message: 'Erreur interne du serveur' });
     }
   } else {
-    res.status(405).json({ success: false, message: 'Method not allowed' });
+    return res.status(405).json({ message: `Méthode ${req.method} non autorisée` });
   }
 }
