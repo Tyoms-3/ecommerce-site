@@ -1,36 +1,39 @@
-import dbConnect from '../../../lib/dbConnect';
-import User from '../../../lib/models/User';
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
-import nodemailer from 'nodemailer';
+import { sendEmail } from '../../../lib/mail'; // Créez une fonction d'envoi d'email
+import User from '../../../lib/models/User'; // Assurez-vous que ce modèle existe
 
 export default async function handler(req, res) {
-  await dbConnect();
-  
   if (req.method === 'POST') {
-    try {
-      const { email } = req.body;
+    const { email } = req.body;
 
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
+    try {
       const user = await User.findOne({ email });
+
       if (!user) {
-        return res.status(404).json({ success: false, message: 'User not found' });
+        return res.status(404).json({ message: 'User not found' });
       }
 
-      // Generate a reset token
+      // Générer un token de réinitialisation
       const resetToken = crypto.randomBytes(32).toString('hex');
       user.resetToken = resetToken;
-      user.resetTokenExpire = Date.now() + 3600000; // 1 hour
+      user.resetTokenExpiration = Date.now() + 3600000; // 1 heure
       await user.save();
 
-      // Send email with reset token (This part should be configured with your email service)
-      // For simplicity, the actual email sending code is omitted here.
-      // You can use nodemailer or any other email service.
+      // Envoyer l'email de réinitialisation
+      const resetLink = `${process.env.NEXT_PUBLIC_API_URL}/reset-password?token=${resetToken}`;
+      await sendEmail(user.email, 'Réinitialisation du mot de passe', `Cliquez sur le lien pour réinitialiser votre mot de passe : ${resetLink}`);
 
-      res.status(200).json({ success: true, message: 'Reset token sent to email' });
+      return res.status(200).json({ message: 'Réinitialisation du mot de passe envoyée' });
     } catch (error) {
-      res.status(400).json({ success: false, message: error.message });
+      console.error('Erreur lors de la demande de réinitialisation du mot de passe:', error);
+      return res.status(500).json({ message: 'Erreur interne du serveur' });
     }
   } else {
-    res.status(405).json({ success: false, message: 'Method not allowed' });
+    return res.status(405).json({ message: `Méthode ${req.method} non autorisée` });
   }
 }
+
