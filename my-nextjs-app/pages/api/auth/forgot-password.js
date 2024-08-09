@@ -1,6 +1,6 @@
 import crypto from 'crypto';
-import { sendEmail } from '../../../lib/mail'; // Créez une fonction d'envoi d'email
-import User from '../../../lib/models/User'; // Assurez-vous que ce modèle existe
+import { sendEmail } from '../../../lib/mail'; // Assure-toi que cette fonction existe et est correctement configurée
+import User from '../../../lib/models/User';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -36,4 +36,3 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: `Méthode ${req.method} non autorisée` });
   }
 }
-
