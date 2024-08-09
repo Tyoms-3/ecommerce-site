@@ -1,6 +1,6 @@
 {
   "name": "OneTMD",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "A Next.js e-commerce site for personalized couple clothing and accessories.",
   "private": true,
   "scripts": {
@@ -24,7 +24,7 @@
     "@paypal/react-paypal-js": "^8.5.0",
     "mongodb": "^4.4.10",
     "mongoose" : "^8.5.2",
-    "bcrypt.js": "^2.4.3",
+    "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
     "crypto": "^1.0.1"
   },
