@@ -12,7 +12,7 @@ const products = {
       { type: 'double_broderie_grande', label: 'Double broderie grande (+€5.0)' },
       { type: 'double_broderie_petite', label: 'Double broderie petite (+€2.0)' },
     ],
-    basePrice: 20.00
+    basePrice: 19.99
   },
   2: {
     id: 2,
@@ -24,7 +24,7 @@ const products = {
       { type: 'double_broderie_grande', label: 'Double broderie grande (+€5.0)' },
       { type: 'double_broderie_petite', label: 'Double broderie petite (+€2.0)' },
     ],
-    basePrice: 25.00
+    basePrice: 24.99
   }
 };
 
