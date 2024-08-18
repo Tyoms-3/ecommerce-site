@@ -1,5 +1,5 @@
 // pages/api/orders/index.js
-import clientPromise from '../../../lib/mongodb'; // Assurez-vous que le chemin est correct
+import clientPromise from '../../../lib/mongodb'; 
 import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
@@ -19,17 +19,39 @@ export default async function handler(req, res) {
     
     case 'POST':
       try {
-        const { customerId, items, totalAmount } = req.body;
+        const { customerId, items } = req.body;
 
-        if (!customerId || !items || !totalAmount) {
+        if (!customerId || !items) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
+
+        // Calcul du montant total
+        let totalAmount = 0;
+
+        items.forEach(item => {
+          let itemPrice = item.price;
+
+          // Calcul du prix de la personnalisation
+          if (item.customizations && item.customizations.embroideryOption) {
+            if (item.customizations.embroideryOption === 'double_broderie_grande') {
+              itemPrice += 5.00;
+            } else if (item.customizations.embroideryOption === 'double_broderie_grande_et_petite') {
+              itemPrice += 3.50;
+            } else if (item.customizations.embroideryOption === 'double_broderie_petite') {
+              itemPrice += 2.00;
+            }
+          }
+
+          totalAmount += itemPrice * item.quantity;
+        });
 
         const result = await collection.insertOne({
           customerId,
           items,
           totalAmount,
+          status: "pending",
           createdAt: new Date(),
+          updatedAt: new Date()
         });
 
         return res.status(201).json({ success: true, data: result.ops[0] });
@@ -49,7 +71,7 @@ export default async function handler(req, res) {
 
         const result = await collection.updateOne(
           { _id: new ObjectId(id) },
-          { $set: { status } }
+          { $set: { status, updatedAt: new Date() } }
         );
 
         if (result.matchedCount === 1) {
