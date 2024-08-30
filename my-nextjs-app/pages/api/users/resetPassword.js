@@ -2,12 +2,22 @@ import dbConnect from '../../../lib/dbConnect';
 import User from '../../../lib/models/User';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
+import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   await dbConnect();
 
   if (req.method === 'POST') {
-    const { email } = req.body;
+    const { email, token } = req.body;
+
+    // Vérification du JWT (optionnel, si tu veux sécuriser cette opération)
+    if (token) {
+      try {
+        jwt.verify(token, process.env.JWT_SECRET);
+      } catch (error) {
+        return res.status(401).json({ error: 'Invalid or expired token' });
+      }
+    }
 
     try {
       const user = await User.findOne({ email });
@@ -48,9 +58,4 @@ export default async function handler(req, res) {
 
       res.status(200).json({ message: 'Email sent' });
     } catch (error) {
-      res.status(400).json({ error: 'Error sending email' });
-    }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
-  }
-}
+      res.statu
