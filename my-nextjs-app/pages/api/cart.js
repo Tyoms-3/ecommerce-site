@@ -1,12 +1,31 @@
 // pages/api/cart.js
-import clientPromise from '../../lib/mongodb'; // Assurez-vous que le chemin est correct
+import clientPromise from '../../lib/mongodb';
 import { ObjectId } from 'mongodb';
+import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   const client = await clientPromise;
   const db = client.db('ecommerce');
   const collection = db.collection('cart');
   const productsCollection = db.collection('products');
+
+  if (req.method !== 'GET' && req.method !== 'POST' && req.method !== 'DELETE') {
+    return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
+  }
+
+  // Authentification
+  const token = req.headers.authorization?.split(' ')[1];
+  if (req.method !== 'GET') {
+    if (!token) {
+      return res.status(401).json({ message: 'No token provided' });
+    }
+
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      return res.status(401).json({ message: 'Invalid or expired token' });
+    }
+  }
 
   switch (req.method) {
     case 'GET':
@@ -26,14 +45,12 @@ export default async function handler(req, res) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
 
-        // Récupération des détails du produit
         const product = await productsCollection.findOne({ _id: new ObjectId(productId) });
 
         if (!product) {
           return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Calcul du prix de la personnalisation
         let customizationPrice = 0;
         if (customizations.embroidery === 'double_broderie_grande') {
           customizationPrice = 5.0;
@@ -41,10 +58,8 @@ export default async function handler(req, res) {
           customizationPrice = 3.5;
         }
 
-        // Calcul du prix total de l'article
         const totalItemPrice = (product.basePrice + customizationPrice) * quantity;
 
-        // Insertion dans le panier
         const result = await collection.insertOne({
           productId: ObjectId(productId),
           quantity,
@@ -88,4 +103,3 @@ export default async function handler(req, res) {
       return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
   }
 }
-
