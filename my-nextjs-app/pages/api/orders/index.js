@@ -1,11 +1,30 @@
 // pages/api/orders/index.js
 import clientPromise from '../../../lib/mongodb'; 
 import { ObjectId } from 'mongodb';
+import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   const client = await clientPromise;
   const db = client.db('ecommerce');
   const collection = db.collection('orders');
+
+  if (req.method !== 'GET' && req.method !== 'POST' && req.method !== 'PUT' && req.method !== 'DELETE') {
+    return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
+  }
+
+  // Authentification
+  const token = req.headers.authorization?.split(' ')[1];
+  if (req.method !== 'GET') {
+    if (!token) {
+      return res.status(401).json({ message: 'No token provided' });
+    }
+
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      return res.status(401).json({ message: 'Invalid or expired token' });
+    }
+  }
 
   switch (req.method) {
     case 'GET':
@@ -25,13 +44,11 @@ export default async function handler(req, res) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
 
-        // Calcul du montant total
         let totalAmount = 0;
 
         items.forEach(item => {
           let itemPrice = item.price;
 
-          // Calcul du prix de la personnalisation
           if (item.customizations && item.customizations.embroideryOption) {
             if (item.customizations.embroideryOption === 'double_broderie_grande') {
               itemPrice += 5.00;
