@@ -15,9 +15,11 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid credentials' });
       }
 
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '30d',
-      });
+      const token = jwt.sign(
+        { id: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '30d', algorithm: 'HS256' }  // Ajout de l'algorithme explicitement
+      );
 
       res.status(200).json({
         success: true,
@@ -31,7 +33,8 @@ export default async function handler(req, res) {
         },
       });
     } catch (error) {
-      res.status(400).json({ error: 'Error logging in' });
+      console.error('Error during login:', error);  // Ajout d'un log pour débogage
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed' });
