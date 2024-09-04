@@ -11,6 +11,11 @@ const initialOptions = {
 };
 
 const ProductPage = () => {
+  // Vérification des variables d'environnement
+  console.log('MONGODB_URI:', process.env.MONGODB_URI);
+  console.log('PayPal Client ID:', process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID);
+  console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
+
   const router = useRouter();
   const { id } = router.query;
 
