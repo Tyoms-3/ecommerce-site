@@ -1,4 +1,3 @@
-// pages/api/products/index.js
 import dbConnect from '../../../lib/dbConnect';
 import Product from '../../../lib/models/Product';
 
@@ -28,6 +27,15 @@ export default async function handler(req, res) {
       return res.status(201).json({ success: true, data: savedProduct });
     } catch (error) {
       console.error('Error creating product:', error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+  } else if (req.method === 'GET') {
+    try {
+      // Récupération de tous les produits
+      const products = await Product.find({});
+      return res.status(200).json({ success: true, data: products });
+    } catch (error) {
+      console.error('Error fetching products:', error);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
   } else {
