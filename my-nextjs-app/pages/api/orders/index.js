@@ -1,12 +1,12 @@
 // pages/api/orders/index.js
-import clientPromise from '../../../lib/mongodb'; 
+import dbConnect from '../../../lib/dbConnect';
+import Product from '../../../lib/models/Product'; // Assurez-vous que le modèle est bien importé
+import User from '../../../lib/models/User'; // Assurez-vous que le modèle est bien importé
 import { ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db('ecommerce');
-  const collection = db.collection('orders');
+  await dbConnect();
 
   if (req.method !== 'GET' && req.method !== 'POST' && req.method !== 'PUT' && req.method !== 'DELETE') {
     return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
