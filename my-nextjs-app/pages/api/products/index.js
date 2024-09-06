@@ -1,7 +1,10 @@
 // pages/api/products/index.js
-import clientPromise from '../../../lib/mongodb'; // Assurez-vous que le chemin est correct
+import dbConnect from '../../../lib/dbConnect';
+import Product from '../../../lib/models/Product';
 
 export default async function handler(req, res) {
+  await dbConnect(); // Connexion à la base de données
+
   if (req.method === 'POST') {
     try {
       const { name, image, basePrice, colors, embroideryOptions } = req.body;
@@ -10,11 +13,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Missing required fields' });
       }
 
-      const client = await clientPromise;
-      const db = client.db('ecommerce');
-      const collection = db.collection('products');
-
-      const result = await collection.insertOne({
+      // Création du produit avec Mongoose
+      const newProduct = new Product({
         name,
         image,
         basePrice,
@@ -22,7 +22,10 @@ export default async function handler(req, res) {
         embroideryOptions,
       });
 
-      return res.status(201).json({ success: true, data: result.ops[0] });
+      // Sauvegarde dans la base de données
+      const savedProduct = await newProduct.save();
+
+      return res.status(201).json({ success: true, data: savedProduct });
     } catch (error) {
       console.error('Error creating product:', error);
       return res.status(500).json({ message: 'Internal Server Error' });
