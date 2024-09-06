@@ -1,5 +1,6 @@
 // lib/models/Product.js
 import mongoose from 'mongoose';
+import dbConnect from '../dbConnect';
 
 const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -12,5 +13,8 @@ const ProductSchema = new mongoose.Schema({
     additionalCost: { type: Number, required: true }
   }]
 });
+
+// Assurez-vous de la connexion avant de définir le modèle
+dbConnect();
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
