@@ -1,27 +1,7 @@
 [build]
   command = "npm run build"
   publish = ".next"
-  functions = "functions"
-
-[[redirects]]
-  from = "/api/cart"
-  to = "/.netlify/functions/cart"
-  status = 200
-
-[[redirects]]
-  from = "/api/orders"
-  to = "/.netlify/functions/orders"
-  status = 200
-
-[[redirects]]
-  from = "/api/products/:id"
-  to = "/.netlify/functions/product-id"
-  status = 200
-
-[[redirects]]
-  from = "/api/products"
-  to = "/.netlify/functions/products"
-  status = 200
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
