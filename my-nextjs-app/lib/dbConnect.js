@@ -22,10 +22,8 @@ async function dbConnect() {
     const opts = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      bufferCommands: false,
-      bufferMaxEntries: 0,
-      useFindAndModify: false,
-      useCreateIndex: true,
+      bufferCommands: false, // Désactive le buffering dans Mongoose
+      // Les options obsolètes ont été retirées
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
