@@ -1,14 +1,13 @@
 // pages/api/orders/index.js
 import dbConnect from '../../../lib/dbConnect';
-import Product from '../../../lib/models/Product'; // Assurez-vous que le modèle est bien importé
-import User from '../../../lib/models/User'; // Assurez-vous que le modèle est bien importé
+import Order from '../../../lib/models/Order'; // Assurez-vous que le modèle Order est bien importé
 import { ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   await dbConnect();
 
-  if (req.method !== 'GET' && req.method !== 'POST' && req.method !== 'PUT' && req.method !== 'DELETE') {
+  if (!['GET', 'POST', 'PUT', 'DELETE'].includes(req.method)) {
     return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
   }
 
@@ -29,7 +28,7 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        const orders = await collection.find({}).toArray();
+        const orders = await Order.find({}); // Utilisation du modèle Order pour récupérer les commandes
         return res.status(200).json(orders);
       } catch (error) {
         console.error('Error fetching orders:', error);
@@ -62,7 +61,7 @@ export default async function handler(req, res) {
           totalAmount += itemPrice * item.quantity;
         });
 
-        const result = await collection.insertOne({
+        const newOrder = new Order({
           customerId,
           items,
           totalAmount,
@@ -71,7 +70,9 @@ export default async function handler(req, res) {
           updatedAt: new Date()
         });
 
-        return res.status(201).json({ success: true, data: result.ops[0] });
+        const result = await newOrder.save();
+
+        return res.status(201).json({ success: true, data: result });
       } catch (error) {
         console.error('Error creating order:', error);
         return res.status(500).json({ message: 'Internal Server Error' });
@@ -86,7 +87,7 @@ export default async function handler(req, res) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
 
-        const result = await collection.updateOne(
+        const result = await Order.updateOne(
           { _id: new ObjectId(id) },
           { $set: { status, updatedAt: new Date() } }
         );
@@ -109,7 +110,7 @@ export default async function handler(req, res) {
           return res.status(400).json({ message: 'Missing ID' });
         }
 
-        const result = await collection.deleteOne({ _id: new ObjectId(id) });
+        const result = await Order.deleteOne({ _id: new ObjectId(id) });
 
         if (result.deletedCount === 1) {
           return res.status(200).json({ success: true, message: 'Order deleted' });
