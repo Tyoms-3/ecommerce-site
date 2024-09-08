@@ -1,8 +1,8 @@
 // pages/api/cart.js
 import dbConnect from '../../lib/dbConnect';
 import Product from '../../lib/models/Product';
+import Cart from '../../lib/models/Cart';
 import { ObjectId } from 'mongodb';
-import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   await dbConnect(); // Assurez-vous que la connexion est établie
@@ -10,8 +10,9 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        const items = await Cart.find({}).toArray(); // Assurez-vous d'avoir un modèle Cart
-        return res.status(200).json(items);
+        // Récupération de tous les items du panier
+        const items = await Cart.find({});
+        return res.status(200).json({ success: true, data: items });
       } catch (error) {
         console.error('Error fetching cart items:', error);
         return res.status(500).json({ message: 'Internal Server Error' });
@@ -30,15 +31,17 @@ export default async function handler(req, res) {
         if (customizations.embroidery === 'double_broderie_grande_et_petite') customizationPrice = 3.5;
 
         const totalItemPrice = (product.basePrice + customizationPrice) * quantity;
-        const result = await Cart.insertOne({ // Assurez-vous d'avoir un modèle Cart
+        
+        const cartItem = new Cart({
           productId: ObjectId(productId),
           quantity,
           productName: product.name,
           price: product.basePrice,
           customizations: { embroidery: customizations.embroidery, price: customizationPrice },
           totalItemPrice,
-          createdAt: new Date(),
         });
+
+        const result = await cartItem.save();
 
         return res.status(201).json({ success: true, data: result });
       } catch (error) {
@@ -51,7 +54,7 @@ export default async function handler(req, res) {
         const { id } = req.query;
         if (!id) return res.status(400).json({ message: 'Missing ID' });
 
-        const result = await Cart.deleteOne({ _id: new ObjectId(id) }); // Assurez-vous d'avoir un modèle Cart
+        const result = await Cart.deleteOne({ _id: new ObjectId(id) });
         if (result.deletedCount === 1) {
           return res.status(200).json({ success: true, message: 'Item deleted' });
         } else {
