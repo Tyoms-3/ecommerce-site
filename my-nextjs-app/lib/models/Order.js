@@ -1,44 +1,43 @@
 // lib/models/Order.js
 import mongoose from 'mongoose';
 
-const OrderSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const OrderSchema = new Schema({
   customerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  items: [
-    {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true,
-      },
-      description: {
+  items: [{
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    sku: {
+      type: String,
+    },
+    productRef: {
+      type: String,
+    },
+    customizations: {
+      embroideryOption: {
         type: String,
-        required: true,
-      },
-      sku: {
-        type: String,
-        required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-      },
-      customizations: {
-        embroideryOption: {
-          type: String,
-          enum: ['none', 'double_broderie_grande', 'double_broderie_grande_et_petite', 'double_broderie_petite'],
-          default: 'none',
-        },
       },
     },
-  ],
+  }],
   totalAmount: {
     type: Number,
     required: true,
@@ -54,7 +53,7 @@ const OrderSchema = new mongoose.Schema({
   },
   paymentStatus: {
     type: String,
-    enum: ['pending', 'paid', 'failed'],
+    enum: ['pending', 'completed', 'failed'],
     default: 'pending',
   },
   shippingAddress: {
@@ -63,7 +62,6 @@ const OrderSchema = new mongoose.Schema({
   },
   deliveryDate: {
     type: Date,
-    required: true,
   },
   createdAt: {
     type: Date,
@@ -73,11 +71,6 @@ const OrderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
-
-OrderSchema.pre('save', function (next) {
-  this.updatedAt = Date.now();
-  next();
 });
 
 export default mongoose.models.Order || mongoose.model('Order', OrderSchema);
