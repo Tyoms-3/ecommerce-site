@@ -1,7 +1,6 @@
 // pages/api/orders/index.js
 import dbConnect from '../../../lib/dbConnect';
 import Order from '../../../lib/models/Order'; // Assurez-vous que le modèle Order est bien importé
-import { ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
@@ -28,8 +27,19 @@ export default async function handler(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        const orders = await Order.find({}); // Utilisation du modèle Order pour récupérer les commandes
-        return res.status(200).json(orders);
+        if (req.query.id) {
+          // Récupération d'une commande spécifique
+          const order = await Order.findById(req.query.id).populate('customerId').populate('items.productId').exec();
+          if (order) {
+            return res.status(200).json(order);
+          } else {
+            return res.status(404).json({ message: 'Order not found' });
+          }
+        } else {
+          // Récupération de toutes les commandes
+          const orders = await Order.find({}).populate('customerId').populate('items.productId').exec();
+          return res.status(200).json(orders);
+        }
       } catch (error) {
         console.error('Error fetching orders:', error);
         return res.status(500).json({ message: 'Internal Server Error' });
@@ -37,9 +47,9 @@ export default async function handler(req, res) {
     
     case 'POST':
       try {
-        const { customerId, items } = req.body;
+        const { customerId, items, paymentMethod, shippingAddress, deliveryDate } = req.body;
 
-        if (!customerId || !items) {
+        if (!customerId || !items || !paymentMethod || !shippingAddress || !deliveryDate) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
 
@@ -65,9 +75,11 @@ export default async function handler(req, res) {
           customerId,
           items,
           totalAmount,
-          status: "pending",
-          createdAt: new Date(),
-          updatedAt: new Date()
+          status: 'pending',
+          paymentMethod,
+          paymentStatus: 'pending',
+          shippingAddress,
+          deliveryDate,
         });
 
         const result = await newOrder.save();
@@ -81,15 +93,20 @@ export default async function handler(req, res) {
     case 'PUT':
       try {
         const { id } = req.query;
-        const { status } = req.body;
+        const { status, paymentMethod, shippingAddress, deliveryDate } = req.body;
 
         if (!id || !status) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
 
+        const updateFields = { status, updatedAt: new Date() };
+        if (paymentMethod) updateFields.paymentMethod = paymentMethod;
+        if (shippingAddress) updateFields.shippingAddress = shippingAddress;
+        if (deliveryDate) updateFields.deliveryDate = deliveryDate;
+
         const result = await Order.updateOne(
-          { _id: new ObjectId(id) },
-          { $set: { status, updatedAt: new Date() } }
+          { _id: id },
+          { $set: updateFields }
         );
 
         if (result.matchedCount === 1) {
@@ -110,7 +127,7 @@ export default async function handler(req, res) {
           return res.status(400).json({ message: 'Missing ID' });
         }
 
-        const result = await Order.deleteOne({ _id: new ObjectId(id) });
+        const result = await Order.deleteOne({ _id: id });
 
         if (result.deletedCount === 1) {
           return res.status(200).json({ success: true, message: 'Order deleted' });
