@@ -1,8 +1,7 @@
 // lib/authMiddleware.js
 import jwt from 'jsonwebtoken';
 
-export default function authMiddleware(req, res, next) {
-  // Récupère le token du header Authorization
+const authMiddleware = (handler) => async (req, res) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -12,11 +11,12 @@ export default function authMiddleware(req, res, next) {
   const token = authHeader.split(' ')[1];
 
   try {
-    // Vérifie et décode le token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Ajoute l'utilisateur décodé à la requête
-    next(); // Passe à l'étape suivante
+    req.user = decoded; // Attaches the decoded user to the request
+    return handler(req, res); // Proceeds to the main handler
   } catch (error) {
     return res.status(403).json({ message: 'Unauthorized: Invalid token' });
   }
-}
+};
+
+export default authMiddleware;
