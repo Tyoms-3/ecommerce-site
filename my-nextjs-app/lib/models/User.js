@@ -34,4 +34,4 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 // Assurez-vous de la connexion avant de définir le modèle
 dbConnect();
 
-export default mongoose.models.User || mongoose.model('users', userSchema);
+export default mongoose.models.User || mongoose.model('User', userSchema);
