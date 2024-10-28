@@ -17,4 +17,4 @@ const ProductSchema = new mongoose.Schema({
 // Assurez-vous de la connexion avant de définir le modèle
 dbConnect();
 
-export default mongoose.models.Product || mongoose.model('products', ProductSchema);
+export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
