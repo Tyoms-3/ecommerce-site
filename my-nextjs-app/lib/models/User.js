@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import dbConnect from '../dbConnect';
 
+// Définition du schéma de l'utilisateur
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -20,6 +21,7 @@ const userSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+// Middleware pour hacher le mot de passe avant de sauvegarder l'utilisateur
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(10);
@@ -27,11 +29,14 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// Méthode pour comparer les mots de passe
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Assurez-vous de la connexion avant de définir le modèle
+// Connexion à la base de données
 dbConnect();
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+// Exportation du modèle User
+const UserModel = mongoose.models.User || mongoose.model('User', userSchema);
+export default UserModel;
