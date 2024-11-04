@@ -1,6 +1,7 @@
 // pages/api/users/login.js
 import dbConnect from '../../../lib/dbConnect';
 import User from '../../../lib/models/User';
+import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   await dbConnect();
@@ -24,8 +25,26 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      // Authentification réussie - tu peux renvoyer un token ou des informations utilisateur ici
-      return res.status(200).json({ success: true, message: 'Logged in successfully' });
+      // Authentification réussie - création d'un JWT
+      const token = jwt.sign(
+        { id: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '30d', algorithm: 'HS256' } // Ajout de l'algorithme explicitement
+      );
+
+      // Réponse avec le token et des informations utilisateur
+      return res.status(200).json({
+        success: true,
+        message: 'Logged in successfully',
+        data: {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          token,
+        },
+      });
     } catch (error) {
       console.error('Error logging in:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
