@@ -19,15 +19,13 @@ async function dbConnect() {
   }
 
   if (!cached.promise) {
-    const opts = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    cached.promise = mongoose.connect(MONGODB_URI, {
       bufferCommands: false, // Désactive le buffering dans Mongoose
-      // Les options obsolètes ont été retirées
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    }).then((mongoose) => {
       return mongoose;
+    }).catch(err => {
+      console.error('Error connecting to MongoDB:', err);
+      throw err; // Lance l'erreur pour qu'elle soit gérée par l'appelant
     });
   }
   cached.conn = await cached.promise;
@@ -35,3 +33,4 @@ async function dbConnect() {
 }
 
 export default dbConnect;
+
