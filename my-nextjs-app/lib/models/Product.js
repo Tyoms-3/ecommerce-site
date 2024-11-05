@@ -7,14 +7,16 @@ const ProductSchema = new mongoose.Schema({
   image: { type: String, required: true },
   basePrice: { type: Number, required: true },
   colors: { type: [String], required: true },
-  embroideryOptions: [{
-    type: { type: String, required: true },
-    label: { type: String, required: true },
-    additionalCost: { type: Number, required: true }
-  }]
+  embroideryOptions: [
+    {
+      type: { type: String, required: true },
+      label: { type: String, required: true },
+      additionalCost: { type: Number, required: true },
+    },
+  ],
 });
 
 // Connexion à la base de données 'products'
-const Product = (await dbConnect('products')).model('Product', ProductSchema);
+const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
 
 export default Product;
