@@ -1,5 +1,6 @@
 // lib/models/Order.js
 import mongoose from 'mongoose';
+import dbConnect from '../dbConnect';
 
 const { Schema } = mongoose;
 
@@ -23,19 +24,11 @@ const OrderSchema = new Schema({
       type: Number,
       required: true,
     },
-    description: {
-      type: String,
-    },
-    sku: {
-      type: String,
-    },
-    productRef: {
-      type: String,
-    },
+    description: String,
+    sku: String,
+    productRef: String,
     customizations: {
-      embroideryOption: {
-        type: String,
-      },
+      embroideryOption: String,
     },
   }],
   totalAmount: {
@@ -60,9 +53,7 @@ const OrderSchema = new Schema({
     type: String,
     required: true,
   },
-  deliveryDate: {
-    type: Date,
-  },
+  deliveryDate: Date,
   createdAt: {
     type: Date,
     default: Date.now,
@@ -73,4 +64,8 @@ const OrderSchema = new Schema({
   },
 });
 
-export default mongoose.models.Order || mongoose.model('Order', OrderSchema);
+// Connexion à la base de données 'orders'
+const Order = (await dbConnect('orders')).model('Order', OrderSchema);
+
+export default Order;
+
