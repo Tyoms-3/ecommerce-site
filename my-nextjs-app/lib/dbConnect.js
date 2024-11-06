@@ -11,7 +11,8 @@ const dbURIs = {
 // Vérification que chaque URI existe dans .env.local
 for (const [dbName, uri] of Object.entries(dbURIs)) {
   if (!uri) {
-    throw new Error(`Please define the ${dbName.toUpperCase()}_URI environment variable inside .env.local`);
+    console.error(`Veuillez définir la variable d'environnement ${dbName.toUpperCase()}_URI dans .env.local`);
+    throw new Error(`Missing environment variable for ${dbName.toUpperCase()} database URI.`);
   }
 }
 
@@ -21,22 +22,24 @@ const cachedConnections = global.mongooseConnections || {};
 global.mongooseConnections = cachedConnections;
 
 async function dbConnect(dbName) {
+  // Vérifie si la connexion pour cette base de données est déjà en cache
   if (!cachedConnections[dbName]) {
     const dbURI = dbURIs[dbName];
-    if (!dbURI) {
-      throw new Error(`No URI found for the database: ${dbName}`);
-    }
 
-    cachedConnections[dbName] = mongoose.createConnection(dbURI, {
-      bufferCommands: false,
-    }).then((connection) => {
-      console.log(`Connected to MongoDB database: ${dbName}`);
-      return connection;
-    }).catch(err => {
-      console.error(`Error connecting to MongoDB database: ${dbName}`, err);
-      throw err;
-    });
+    try {
+      // Utilise async/await pour gérer la promesse de connexion
+      const connection = await mongoose.createConnection(dbURI, {
+        bufferCommands: false,
+      });
+      cachedConnections[dbName] = connection;
+      console.log(`Connecté à la base de données MongoDB : ${dbName}`);
+    } catch (err) {
+      console.error(`Erreur de connexion à la base de données MongoDB : ${dbName}`, err);
+      throw new Error(`Unable to connect to database: ${dbName}`);
+    }
   }
+
+  // Retourne la connexion en cache
   return cachedConnections[dbName];
 }
 
