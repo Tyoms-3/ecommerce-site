@@ -1,10 +1,9 @@
 // pages/api/users/login.js
-import dbConnect from '../../../lib/dbConnect';
-import User from '../../../lib/models/User';
+import getUserModel from '../../../lib/models/User';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
-  await dbConnect();
+  const User = await getUserModel();
 
   if (req.method === 'POST') {
     const { email, password } = req.body;
@@ -25,14 +24,12 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      // Authentification réussie - création d'un JWT
       const token = jwt.sign(
         { id: user._id },
         process.env.JWT_SECRET,
-        { expiresIn: '30d', algorithm: 'HS256' } // Ajout de l'algorithme explicitement
+        { expiresIn: '30d', algorithm: 'HS256' }
       );
 
-      // Réponse avec le token et des informations utilisateur
       return res.status(200).json({
         success: true,
         message: 'Logged in successfully',
