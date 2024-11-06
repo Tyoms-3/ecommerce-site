@@ -1,9 +1,9 @@
-import dbConnect from '../../../lib/dbConnect';
-import User from '../../../lib/models/User';
+// pages/api/users/register.js
+import getUserModel from '../../../lib/models/User';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
-  await dbConnect();
+  const User = await getUserModel();
 
   if (req.method === 'POST') {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       const token = jwt.sign(
         { id: user._id },
         process.env.JWT_SECRET,
-        { expiresIn: '30d', algorithm: 'HS256' }  // Ajout de l'algorithme explicitement
+        { expiresIn: '30d', algorithm: 'HS256' }
       );
 
       res.status(201).json({
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         },
       });
     } catch (error) {
-      console.error('Error during registration:', error);  // Ajout d'un log pour débogage
+      console.error('Error during registration:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   } else {
